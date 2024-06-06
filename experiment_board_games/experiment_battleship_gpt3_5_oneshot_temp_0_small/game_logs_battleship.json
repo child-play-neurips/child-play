@@ -1,0 +1,5122 @@
+[
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 10
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 11
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 10
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 11
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 10
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 11
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 12
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 13
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 10
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 11
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 10
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 11
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 9
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            0
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            0
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            0
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            1
+        ],
+        "turn": 0
+    },
+    {
+        "player": 1,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 1
+    },
+    {
+        "player": 0,
+        "move": [
+            1,
+            2
+        ],
+        "turn": 2
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 3
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 4
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 5
+    },
+    {
+        "player": 0,
+        "move": [
+            2,
+            1
+        ],
+        "turn": 6
+    },
+    {
+        "player": 1,
+        "move": [
+            0,
+            1
+        ],
+        "turn": 7
+    },
+    {
+        "player": 0,
+        "move": [
+            0,
+            2
+        ],
+        "turn": 8
+    },
+    {
+        "player": 1,
+        "move": [
+            2,
+            2
+        ],
+        "turn": 9
+    }
+]

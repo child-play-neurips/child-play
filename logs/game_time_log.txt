@@ -1,0 +1,10 @@
+Experiment: battleship, Time: 205.01 seconds
+Experiment: battleship, Time: 198.96 seconds
+Experiment: battleship, Time: 189.14 seconds
+Experiment: battleship, Time: 213.73 seconds
+Experiment: battleship, Time: 204.23 seconds
+Experiment: battleship, Time: 231.41 seconds
+Experiment: battleship, Time: 299.15 seconds
+Experiment: battleship, Time: 276.15 seconds
+Experiment: battleship, Time: 614.79 seconds
+Total Time for All Experiments: 1839.45 seconds

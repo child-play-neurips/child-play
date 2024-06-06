@@ -1,0 +1,602 @@
+{
+    "correct": 0,
+    "incorrect": 20,
+    "details": [
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "circle",
+                    "triangle",
+                    "rectangle",
+                    "cross"
+                ],
+                "What is the side length (height)?": [
+                    2,
+                    8,
+                    4,
+                    10
+                ],
+                "What is the side length (width)?": [
+                    3,
+                    8,
+                    8,
+                    8
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "circle",
+                "What is the side length (height)?": 2,
+                "What is the side length (width)?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a rectangle.\n\nThe side length (height) is 4.\n\nThe side length (width) is 8."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "cross",
+                    "rectangle",
+                    "triangle",
+                    "circle"
+                ],
+                "What is the side length (height)?": [
+                    6,
+                    1,
+                    9,
+                    10
+                ],
+                "What is the side length (width)?": [
+                    9,
+                    10,
+                    7,
+                    2
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "cross",
+                "What is the side length (height)?": 6,
+                "What is the side length (width)?": 9
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe side length (height) is 10.\n\nThe side length (width) is 9."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "circle",
+                    "cross",
+                    "triangle",
+                    "rectangle"
+                ],
+                "What is the arm length?": [
+                    3,
+                    1,
+                    3,
+                    1
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "circle",
+                "What is the arm length?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe arm length is 3."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "circle",
+                    "rectangle",
+                    "cross",
+                    "triangle"
+                ],
+                "Where is the center?": [
+                    [
+                        7,
+                        6
+                    ],
+                    [
+                        1,
+                        9
+                    ],
+                    [
+                        5,
+                        4
+                    ],
+                    [
+                        12,
+                        4
+                    ]
+                ],
+                "What is the radius?": [
+                    2,
+                    4,
+                    2,
+                    1
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "circle",
+                "Where is the center?": [
+                    7,
+                    6
+                ],
+                "What is the radius?": 2
+            },
+            "user_answers": {},
+            "gpt_response": "The shape represented on the board is a cross.\n\nThe center of the cross is at coordinate (7, 6).\n\nThe radius of the cross is 2."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "rectangle",
+                    "cross",
+                    "triangle",
+                    "circle"
+                ],
+                "What is the side length (height)?": [
+                    4,
+                    3,
+                    2,
+                    10
+                ],
+                "What is the side length (width)?": [
+                    5,
+                    11,
+                    3,
+                    10
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "rectangle",
+                "What is the side length (height)?": 4,
+                "What is the side length (width)?": 5
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe side length (height) is 4.\n\nThe side length (width) is 5."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "rectangle",
+                    "circle",
+                    "cross",
+                    "triangle"
+                ],
+                "What is the arm length?": [
+                    3,
+                    5,
+                    3,
+                    5
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "rectangle",
+                "What is the arm length?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe arm length is 5."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "circle",
+                    "cross",
+                    "triangle",
+                    "rectangle"
+                ],
+                "What is the side length (height)?": [
+                    8,
+                    2,
+                    8,
+                    7
+                ],
+                "What is the side length (width)?": [
+                    3,
+                    4,
+                    6,
+                    9
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "circle",
+                "What is the side length (height)?": 8,
+                "What is the side length (width)?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a rectangle.\n\nThe side length (height) is 8.\n\nThe side length (width) is 4."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "circle",
+                    "cross",
+                    "triangle",
+                    "rectangle"
+                ],
+                "What is the side length (height)?": [
+                    9,
+                    6,
+                    2,
+                    10
+                ],
+                "What is the side length (width)?": [
+                    5,
+                    3,
+                    9,
+                    6
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "circle",
+                "What is the side length (height)?": 9,
+                "What is the side length (width)?": 5
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a rectangle.\n\nThe side length (height) is 9.\n\nThe side length (width) is 5."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "triangle",
+                    "cross",
+                    "rectangle",
+                    "circle"
+                ],
+                "What is the side length (height)?": [
+                    9,
+                    6,
+                    1,
+                    4
+                ],
+                "What is the side length (width)?": [
+                    6,
+                    8,
+                    7,
+                    3
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "triangle",
+                "What is the side length (height)?": 9,
+                "What is the side length (width)?": 6
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a rectangle.\n\nThe side length (height) is 9.\n\nThe side length (width) is 6."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "cross",
+                    "circle",
+                    "triangle",
+                    "rectangle"
+                ],
+                "What is the arm length?": [
+                    3,
+                    3,
+                    1,
+                    4
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "cross",
+                "What is the arm length?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe arm length is 3."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "cross",
+                    "rectangle",
+                    "triangle",
+                    "circle"
+                ],
+                "What is the arm length?": [
+                    4,
+                    5,
+                    2,
+                    3
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "cross",
+                "What is the arm length?": 4
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe arm length of this cross is 5."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "circle",
+                    "cross",
+                    "rectangle",
+                    "triangle"
+                ],
+                "Where is the center?": [
+                    [
+                        5,
+                        5
+                    ],
+                    [
+                        11,
+                        10
+                    ],
+                    [
+                        1,
+                        5
+                    ],
+                    [
+                        0,
+                        8
+                    ]
+                ],
+                "What is the radius?": [
+                    2,
+                    5,
+                    4,
+                    4
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "circle",
+                "Where is the center?": [
+                    5,
+                    5
+                ],
+                "What is the radius?": 2
+            },
+            "user_answers": {},
+            "gpt_response": "The shape represented on the board is a rectangle.\n\nThe center of the rectangle is at coordinate (11, 10).\n\nThe radius of a rectangle is not applicable as it is a property of circles."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "triangle",
+                    "circle",
+                    "rectangle",
+                    "cross"
+                ],
+                "What is the arm length?": [
+                    2,
+                    2,
+                    4,
+                    2
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "triangle",
+                "What is the arm length?": 2
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe arm length is 4."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "cross",
+                    "rectangle",
+                    "triangle",
+                    "circle"
+                ],
+                "What is the arm length?": [
+                    3,
+                    2,
+                    3,
+                    1
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "cross",
+                "What is the arm length?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross. The arm length is 3."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "triangle",
+                    "cross",
+                    "rectangle",
+                    "circle"
+                ],
+                "What is the base length?": [
+                    3,
+                    6,
+                    4,
+                    2
+                ],
+                "Which direction is it pointing?": [
+                    "right",
+                    "left",
+                    "up",
+                    "down"
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "triangle",
+                "What is the base length?": 3,
+                "Which direction is it pointing?": "right"
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe base length is 4.\n\nIt is pointing up."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "triangle",
+                    "cross",
+                    "rectangle",
+                    "circle"
+                ],
+                "Where is the center?": [
+                    [
+                        0,
+                        7
+                    ],
+                    [
+                        3,
+                        4
+                    ],
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        12,
+                        12
+                    ]
+                ],
+                "What is the radius?": [
+                    1,
+                    3,
+                    2,
+                    1
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "triangle",
+                "Where is the center?": [
+                    0,
+                    7
+                ],
+                "What is the radius?": 1
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe center of the cross is at (3, 4).\n\nThe radius of the cross is 2."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "rectangle",
+                    "circle",
+                    "cross",
+                    "triangle"
+                ],
+                "What is the side length (height)?": [
+                    7,
+                    5,
+                    8,
+                    6
+                ],
+                "What is the side length (width)?": [
+                    4,
+                    6,
+                    2,
+                    9
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "rectangle",
+                "What is the side length (height)?": 7,
+                "What is the side length (width)?": 4
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a rectangle.\n\nThe side length (height) is 15.\n\nThe side length (width) is 12."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "cross",
+                    "rectangle",
+                    "circle",
+                    "triangle"
+                ],
+                "What is the base length?": [
+                    5,
+                    6,
+                    4,
+                    7
+                ],
+                "Which direction is it pointing?": [
+                    "left",
+                    "up",
+                    "right",
+                    "down"
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "cross",
+                "What is the base length?": 5,
+                "Which direction is it pointing?": "left"
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe base length is 5.\n\nIt is pointing up."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "rectangle",
+                    "circle",
+                    "triangle",
+                    "cross"
+                ],
+                "What is the side length (height)?": [
+                    10,
+                    6,
+                    1,
+                    1
+                ],
+                "What is the side length (width)?": [
+                    4,
+                    6,
+                    1,
+                    5
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "rectangle",
+                "What is the side length (height)?": 10,
+                "What is the side length (width)?": 4
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a rectangle.\n\nThe side length (height) is 10.\n\nThe side length (width) is 4."
+        },
+        {
+            "board_state": "\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1c \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1c \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b\n\u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b \u2b1b",
+            "questions": {
+                "What shape is this?": [
+                    "cross",
+                    "triangle",
+                    "rectangle",
+                    "circle"
+                ],
+                "What is the arm length?": [
+                    3,
+                    1,
+                    3,
+                    3
+                ]
+            },
+            "correct_answers": {
+                "What shape is this?": "cross",
+                "What is the arm length?": 3
+            },
+            "user_answers": {},
+            "gpt_response": "This shape is a cross.\n\nThe arm length of this cross is 3."
+        }
+    ]
+}

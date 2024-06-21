@@ -440,8 +440,8 @@ def main():
     #     # {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'oa:gpt-3.5-turbo-1106',  'num_games': 1, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/triangle', 'temperature':0.5, 'shape': 'triangle'},
     #     {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'ans:1',  'num_games': 10, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/triangle', 'temperature':0.5, 'shape': 'triangle'},
     #     # {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'oa:gpt-3.5-turbo-1106',  'num_games': 1, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/cross', 'temperature':0.5, 'shape': 'cross'},
-    #     # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1_small', 'temperature': 1},
-    #     # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4-1106-preview', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1_small', 'temperature': 1},
+    #     # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1', 'temperature': 1},
+    #     # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4-1106-preview', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1', 'temperature': 1},
     # ]
     
     game_runs = []

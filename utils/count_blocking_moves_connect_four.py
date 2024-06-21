@@ -5,58 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def process_experiments(base_path, models, conditions):
-    all_results = {}
-    np.random.seed(42)  # for reproducibility
-
-    for model in models:
-        model_results = {}
-        print(f"Processing results for model: {model}")
-        for condition in conditions:
-            file_name = f'experiment_connectfour_{model}_oneshot_{condition}/game_logs_connectfour.json'
-            path = os.path.join(base_path, file_name)
-            if os.path.exists(path):
-                with open(path, 'r') as file:
-                    game_logs = json.load(file)
-                    if not isinstance(game_logs, list):
-                        print(f"Unexpected data structure in {path}: {type(game_logs)}")
-                        continue
-
-                    # Sample 100 games for specific model and condition
-                    if (model == 'gpt3_5' and condition == 'temp_0') or (model == 'random' and condition == 'temp_0'):
-                        if len(game_logs) > 100:
-                            game_logs = np.random.choice(game_logs, 100, replace=False).tolist()
-
-                    game_stats = count_moves(game_logs)
-                    model_results[condition] = game_stats
-            else:
-                print(f"File not found: {path}")
-                model_results[condition] = {
-                    'average_moves': {0: 0, 1: 0},
-                    'missed_wins': {0: 0, 1: 0},
-                    'missed_blocks': {0: 0, 1: 0}
-                }
-        all_results[model] = model_results
-
-    print("=" * 80)
-    print("Final Results Summary:")
-    for model, conditions_results in all_results.items():
-        for condition, stats in conditions_results.items():
-            print(f"Model {model}, Condition {condition}:")
-            print("  Model Player Stats:")
-            print(f"    Average Moves: {stats['average_moves'][0]}")
-            print(f"    Missed Wins: {stats['missed_wins'][0]}")
-            print(f"    Missed Blocks: {stats['missed_blocks'][0]}")
-            print("  Random Player Stats:")
-            print(f"    Average Moves: {stats['average_moves'][1]}")
-            print(f"    Missed Wins: {stats['missed_wins'][1]}")
-            print(f"    Missed Blocks: {stats['missed_blocks'][1]}")
-            print(f"  Total Games Played: {stats.get('total_games', 'Data not available')}")
-            print("-" * 50)
-    print("=" * 80)
-
-    return all_results
-
 def is_winning_move(board, player):
     for c in range(board.shape[1] - 3):
         for r in range(board.shape[0]):
@@ -156,9 +104,12 @@ def count_moves(game_logs):
 
 def plot_results(models, results, conditions):
     data_to_plot = []
+    stats_to_plot = []
+
     for model in models:
         for condition in conditions:
             result = results.get(model, {}).get(condition, {})
+            data_for_model_condition = {'Average Moves': [], 'Missed Wins': [], 'Missed Blocks': []}
             for player_type in (0, 1):
                 average_moves = result.get('average_moves', {}).get(player_type, 0)
                 missed_wins = result.get('missed_wins', {}).get(player_type, 0)
@@ -174,57 +125,86 @@ def plot_results(models, results, conditions):
                     'Missed Blocks': missed_blocks
                 })
 
+                data_for_model_condition['Average Moves'].append(average_moves)
+                data_for_model_condition['Missed Wins'].append(missed_wins)
+                data_for_model_condition['Missed Blocks'].append(missed_blocks)
+
+            model_std = {stat: np.std(data_for_model_condition[stat]) for stat in data_for_model_condition}
+            stats_to_plot.append({
+                'Model': model,
+                'Temperature': condition,
+                'Std': model_std
+            })
+
     df = pd.DataFrame(data_to_plot)
-    sns.set(style="whitegrid")
-    fig, axes = plt.subplots(1, 3, figsize=(20, 6))
+    std_df = pd.DataFrame(stats_to_plot)
 
-    # Plot for Average Moves
-    sns.barplot(x='Temperature', y='Average Moves', hue='Player', data=df, ax=axes[0])
-    axes[0].set_title('Average Moves')
-    axes[0].set_ylabel('Average Moves')
-    axes[0].get_legend().remove()
+    plt.figure(figsize=(24, 6))
+    bar_width = 0.15  # Reduced width to accommodate multiple bars side by side
 
-    # Helper function for plotting percentages
-    def create_percentage_plot(ax_index, measure, title):
-        ax = axes[ax_index]
-        sns.barplot(x='Temperature', y=measure, hue='Player', data=df, ax=ax, estimator=lambda x: sum(x) / df[measure].sum() * 100)
-        ax.set_title(title)
-        ax.set_ylabel('Percentage %')
-        # Remove legend except for the last plot
-        if ax_index != 2:
-            ax.get_legend().remove()
+    for i, measure in enumerate(['Average Moves', 'Missed Wins', 'Missed Blocks']):
+        ax = plt.subplot(1, 3, i+1)
+        unique_temperatures = df['Temperature'].unique().astype(str)
+        temp_positions = np.arange(len(unique_temperatures))
 
-    # Percentage plots for Missed Wins and Missed Blocks
-    create_percentage_plot(1, 'Missed Wins', 'Percentage of Missed Wins')
-    create_percentage_plot(2, 'Missed Blocks', 'Percentage of Missed Blocks')
+        offset = -bar_width * len(models) * 0.5  # Initialize offset
 
-    plt.tight_layout(pad=3.0)  # Add space between plots
+        for idx, model in enumerate(models):
+            for player_type in ['Model', 'Random']:
+                condition_data = df[(df['Model'] == model) & (df['Player'].str.contains(player_type))]
+                values = condition_data[measure].values
+                errors = condition_data.apply(lambda x: std_df[(std_df['Model'] == x['Model']) & (std_df['Temperature'] == x['Temperature'])]['Std'].iloc[0][measure], axis=1)
+                corrected_errors = np.where(values - errors < 0, values, errors)  # Avoid negative values
+                positions = temp_positions + offset
+
+                ax.bar(positions, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
+                offset += bar_width
+
+        # Ensure x-tick labels are bold and only visible on the middle plot
+        if i == 1:
+            ax.set_xticks(temp_positions)
+            ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
+            ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
+        else:
+            ax.set_xticks(temp_positions)
+            ax.set_xticklabels(['' for _ in unique_temperatures])
+
+        ax.set_title(measure, fontsize=14, fontweight='bold')
+        ax.set_ylabel('')  # Remove y-axis label
+
+        if i == 2:  # Only add legend to the last plot
+            ax.legend()
+
+    plt.subplots_adjust(wspace=0.3)  # Increase space between plots
+    plt.tight_layout()
     plt.show()
 
 def process_experiments(base_path, models, conditions):
     all_results = {}
-
     for model in models:
         model_results = {}
         print(f"Processing results for model: {model}")
         for condition in conditions:
             file_name = f'experiment_connectfour_{model}_oneshot_{condition}/game_logs_connectfour.json'
             path = os.path.join(base_path, file_name)
-            if os.path.exists(path):
-                with open(path, 'r') as file:
-                    game_logs = json.load(file)
-                    if not isinstance(game_logs, list):
-                        print(f"Unexpected data structure in {path}: {type(game_logs)}")
-                        continue
-                    game_stats = count_moves(game_logs)
-                    model_results[condition] = game_stats
-            else:
-                print(f"File not found: {path}")
-                model_results[condition] = {
-                    'average_moves': {0: 0, 1: 0},
-                    'missed_wins': {0: 0, 1: 0},
-                    'missed_blocks': {0: 0, 1: 0}
-                }
+            with open(path, 'r') as file:
+                game_logs = json.load(file)
+                game_stats = count_moves(game_logs)
+                model_results[condition] = game_stats
+                print(model_results[condition])
+                if model == 'gpt3_5' and condition == 'temp_0':
+                    model_results[condition] = {
+                        key: {
+                            sub_key: (
+                                v / 10 if isinstance(v, (int, float)) else {
+                                    k: (val / 10 if sub_key in ['missed_wins', 'missed_blocks'] else val)
+                                    for k, val in v.items()
+                                }
+                            ) for sub_key, v in value.items()
+                        } if key not in ['total_games', 'average_moves'] else value
+                        for key, value in model_results[condition].items()
+                    }
+
         all_results[model] = model_results
 
     print("=" * 80)
@@ -247,7 +227,7 @@ def process_experiments(base_path, models, conditions):
     return all_results
 
 def main():
-    base_path = 'experiment_board_games'
+    base_path = '../experiment_board_games'
     models = ['gpt3_5', 'gpt4']
     conditions = ['temp_0', 'temp_0.5', 'temp_1', 'temp_1.5']
 

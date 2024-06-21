@@ -87,15 +87,15 @@ def main():
     debug = True
 
     game_runs = [
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1_small'},
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_0_small'},
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_0_5_small'},
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1_5_small'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1_'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_0'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_0.5'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4-1106-preview',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1.5'},
 
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1_small'},
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1_5_small'},
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_0_5_small'},
-        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_0_small'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1_'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1.5'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_0.5'},
+        {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_0'},
 
         {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt3_5_oneshot_temp_1'},
         {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'gpt-3.5-turbo-1106',  'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt3_5_oneshot_temp_1.5'},

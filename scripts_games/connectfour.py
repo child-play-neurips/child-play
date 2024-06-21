@@ -14,7 +14,7 @@ class ConnectFour:
         self.last_move = (-1, -1)
         self.game_over = False
         self.current_player = "P1"  # Assuming P1 starts the game
-        self.prompt = "Connect Four is a two-player game. The pieces fall straight down, occupying the next available space within a column. The objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs. In a board, player 1, you, plays with symbol X, while player 2, your opponent, plays with symbol O. Your input is just a number from 0 to 6, nothing else.  Do not output anything else but the col value else you lose."
+        self.prompt = "Connect-Four is a two-player game. The pieces fall straight down, occupying the next available space within a column. The objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs. In a board, player 1, you, plays with symbol X, while player 2, your opponent, plays with symbol O. Your input is just a number from 0 to 6, nothing else.  Do not output anything else but the col value else you lose."
 
     def reset_board(self):
         self.board = [["." for _ in range(self.cols)] for _ in range(self.rows)]

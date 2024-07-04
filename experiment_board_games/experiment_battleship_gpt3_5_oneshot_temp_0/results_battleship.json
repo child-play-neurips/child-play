@@ -1,7 +1,7 @@
 {
-    "P1 Wins": 0,
-    "P2 Wins": 100,
+    "P1 Wins": 10,
+    "P2 Wins": 90,
     "Ties": 0,
-    "P1 Wrong Moves": 100,
+    "P1 Wrong Moves": 86,
     "P2 Wrong Moves": 0
 }

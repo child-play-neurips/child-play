@@ -164,11 +164,14 @@ def plot_results(models, results, conditions):
             for player_type in ['Model', 'Random']:
                 condition_data = df[(df['Model'] == model) & (df['Player'].str.contains(player_type))]
                 values = condition_data[measure].values
-                errors = condition_data.apply(lambda x: std_df[(std_df['Model'] == x['Model']) & (std_df['Temperature'] == x['Temperature'])]['Std'].iloc[0][measure], axis=1)
-                corrected_errors = np.where(values - errors < 0, values, errors)  # Avoid negative values
-                positions = temp_positions + offset
 
-                ax.bar(positions, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
+                if measure == 'Average Moves':
+                    errors = condition_data.apply(lambda x: std_df[(std_df['Model'] == x['Model']) & (std_df['Temperature'] == x['Temperature'])]['Std'].iloc[0][measure], axis=1)
+                    corrected_errors = np.where(values - errors < 0, values, errors)  # Avoid negative values
+                    ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
+                else:
+                    ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}')
+
                 offset += bar_width
 
         # Ensure x-tick labels are bold and only visible on the middle plot

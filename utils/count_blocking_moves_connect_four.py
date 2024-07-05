@@ -162,15 +162,10 @@ def plot_results(models, results, conditions):
                     ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}')
 
                 offset += bar_width
-
-        # Ensure x-tick labels are bold and only visible on the middle plot
-        if i == 1:
-            ax.set_xticks(temp_positions)
-            ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
-            ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
-        else:
-            ax.set_xticks(temp_positions)
-            ax.set_xticklabels(['' for _ in unique_temperatures])
+                
+        ax.set_xticks(temp_positions)
+        ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
+        ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
 
         ax.set_title(measure, fontsize=14, fontweight='bold')
         ax.set_ylabel('')  # Remove y-axis label

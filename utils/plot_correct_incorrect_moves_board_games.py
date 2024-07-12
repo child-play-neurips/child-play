@@ -1,6 +1,7 @@
 import os
 import json
 import pandas as pd
+import random
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -21,13 +22,12 @@ def read_experiment_data(base_path, games, models, conditions):
                 # Scale down data by dividing each value by 10 if specific conditions are met
                 if game in ['tictactoe', 'connectfour'] and model in ['gpt3.5','gpt3_5'] and condition == 'temp_0':
                     game_logs = {key: value / 10 for key, value in game_logs.items()}
-
+                    
                 model_results[condition] = {
                     'Wins': game_logs['P1 Wins'],
                     'Wins (Random Player)': game_logs['P2 Wins'],
                     'Ties': game_logs['Ties'],
-                    'Incorrect Moves': game_logs['P1 Wrong Moves'],
-                    'Legitimate Model Losses': game_logs['P2 Wins']
+                    'Incorrect Moves': game_logs['P1 Wrong Moves']
                 }
 
             all_results[game][model] = model_results
@@ -47,7 +47,7 @@ def prepare_dataframe(results, games, models, conditions):
                         'Wins': result['Wins'] / total_plays,
                         'Wins (Random Player)': result['Wins (Random Player)'] / total_plays,
                         'Incorrect Moves': result['Incorrect Moves'] / total_plays,
-                        'Legitimate Model Losses': result['Legitimate Model Losses'] / total_plays
+                        'Ties': result['Ties'] / total_plays
                     }
                     entry = {
                         'Model': model,
@@ -73,7 +73,7 @@ def plot_results(df_dict):
     for game, df in df_dict.items():
         plt.figure(figsize=(14, 10))
         print(f"Plotting results for {game}")
-        for idx, metric in enumerate(["Wins", "Wins (Random Player)", "Incorrect Moves", "Legitimate Model Losses"], start=1):
+        for idx, metric in enumerate(["Wins", "Wins (Random Player)", "Incorrect Moves", "Ties"], start=1):
             ax = plt.subplot(2, 2, idx)
             grouped_data = df.groupby(['Model', 'Temperature']).agg({
                 metric: 'mean'

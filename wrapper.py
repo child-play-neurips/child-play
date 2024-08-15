@@ -11,10 +11,12 @@
 # client = MistralClient(api_key=key_mistral)
 
 # OpenAi imports
-from utils.gpt_api import key_openai
+# from utils.gpt_api import key_openai
+import openai
 from openai import OpenAI
 
-client = OpenAI(api_key=key_openai)
+openai.api_key = "YOURAPIKEY"
+client = OpenAI(api_key=openai.api_key)
 
 # Hugging face imports
 from transformers import pipeline

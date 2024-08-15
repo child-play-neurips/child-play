@@ -9,11 +9,11 @@ class TicTacToe:
         else:
             self.board_size = options.get("rows", 3)
             self.debug = options.get("debug", False)
-        self.reset_game()
+        self.reset_board()
         self.name = "tictactoe"
         self.prompt = "Tic-Tac-Toe is a two-player game played on a 3x3 grid. Players take turns placing their mark, X or O, in an empty square. The first player to place three of their marks in a horizontal, vertical, or diagonal row wins the game. You will play as player 1, therefore you play with X while your adversary plays with the symbol O. Your input is then a number (from 0 to 2) for the row followed by a space and another number (from 0 to 2) for the column, nothing else. Do not output anything else but the row col values else you lose."
 
-    def reset_game(self):
+    def reset_board(self):
         self.board = [[" " for _ in range(self.board_size)] for _ in range(self.board_size)]
         self.current_player = "P1"
         self.moves_made = []

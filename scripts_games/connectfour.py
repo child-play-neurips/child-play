@@ -18,6 +18,12 @@ class ConnectFour:
 
     def reset_board(self):
         self.board = [["." for _ in range(self.cols)] for _ in range(self.rows)]
+        self.current_player = "P1"
+        self.moves_made = []
+        self.game_over = False
+
+    def reset_game(self):
+        self.board = [["." for _ in range(self.cols)] for _ in range(self.rows)]
 
     def check_tie(self):
         return all(self.board[0][col] != '.' for col in range(self.cols)) and not self.check_win()
@@ -38,6 +44,9 @@ class ConnectFour:
                     c += d*dc
                     if count >= 4:
                         return True
+        return False
+    
+    def check_loss(self) -> bool:
         return False
 
     def guess(self, player_index, guess, player):

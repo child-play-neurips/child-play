@@ -28,7 +28,7 @@ def calculate_counts(logs, shapes):
     return shape_data
 
 def bar_plot_shapes(base_path, models, temperatures, shapes):
-    plt.rcParams.update({'font.size': 12, 'font.weight': 'bold'})
+    plt.rcParams.update({'font.size': 20, 'font.weight': 'bold'})
     for model in models:
         fig, axes = plt.subplots(2, 2, figsize=(14, 12), sharey=True)
         fig.suptitle(f'Correct and Incorrect Answers by Shape for {model}', fontsize=16, fontweight='bold')
@@ -56,7 +56,7 @@ def bar_plot_shapes(base_path, models, temperatures, shapes):
 
             for p in bar_plot.patches:
                 bar_plot.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., 0),
-                                  ha='center', va='bottom', textcoords='offset points', color='black', fontweight='bold', fontsize=10, xytext=(0, 10))
+                                  ha='center', va='bottom', textcoords='offset points', color='black', fontweight='bold', fontsize=20, xytext=(0, 10))
 
             axes[idx].set_title(f'Temperature {temp}', fontweight='bold')
             axes[idx].yaxis.set_major_locator(MaxNLocator(integer=True))

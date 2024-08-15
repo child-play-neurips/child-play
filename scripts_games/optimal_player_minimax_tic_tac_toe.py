@@ -93,7 +93,7 @@ def play_game(_):
 
         row, col = action
         state, reward, done = env.step(action)
-        if env.current_player == -1:  # Last move was by the agent
+        if env.current_player == -1:  # Last move was by the Minimax
             move_heatmap[row, col] += 1
 
     return reward, move_heatmap
@@ -102,14 +102,14 @@ def parallel_play_games(games=1000):
     with mp.Pool(mp.cpu_count()) as pool:
         results = pool.map(play_game, range(games))
 
-    wins = {"Agent": 0, "Random": 0, "Draw": 0}
+    wins = {"Minimax": 0, "Random": 0, "Draw": 0}
     move_heatmap = np.zeros((3, 3), dtype=int)
 
     for result in results:
         reward, game_heatmap = result
         move_heatmap += game_heatmap
         if reward == 1:
-            wins["Agent"] += 1
+            wins["Minimax"] += 1
         elif reward == -1:
             wins["Random"] += 1
         else:
@@ -127,41 +127,43 @@ if __name__ == "__main__":
 
     # Prepare data for bar plots
     data = {
-        'Outcome': ['Agent Wins', 'Random Wins', 'Draws'],
-        'Count': [wins['Agent'], wins['Random'], wins['Draw']]
+        'Outcome': ['Minimax Wins', 'Random Wins', 'Draws'],
+        'Count': [wins['Minimax'], wins['Random'], wins['Draw']]
     }
 
     df = pd.DataFrame(data)
 
     # Plotting the results
-    plt.rcParams.update({'font.size': 12, 'font.weight': 'bold'})
+    plt.rcParams.update({'font.size': 18, 'font.weight': 'bold'})  # Increased font size and made it bold
     fig, axs = plt.subplots(1, 2, figsize=(14, 10))
 
     def add_labels(ax):
         for p in ax.patches:
             width = p.get_width()
             ax.annotate(f'{int(width)}', xy=(width, p.get_y() + p.get_height() / 2),
-                        xytext=(5, 0), textcoords='offset points', ha='center', va='center')
+                        xytext=(10, 0), textcoords='offset points', ha='center', va='center',
+                        fontsize=14, fontweight='bold')  # Increased annotation font size and made it bold
 
     # Bar plot of wins
     sns.barplot(x='Count', y='Outcome', data=df, orient='h', ax=axs[0])
-    axs[0].set_xlabel("Number of Games")
-    axs[0].set_ylabel("Outcome")
-    axs[0].set_title("Game Outcomes after 1000 Games")
+    axs[0].set_xlabel("Number of Games", fontsize=16, fontweight='bold')
+    axs[0].set_ylabel("Outcome", fontsize=16, fontweight='bold')
+    axs[0].set_title("Game Outcomes after 1000 Games", fontsize=18, fontweight='bold')
     axs[0].xaxis.set_major_formatter(mticker.ScalarFormatter())
     axs[0].xaxis.get_major_formatter().set_useOffset(False)
     axs[0].xaxis.get_major_formatter().set_scientific(False)
     add_labels(axs[0])
     plt.savefig('game_outcomes.svg', format='svg')
 
-    # Heatmap of agent's moves with percentages
+    # Heatmap of Minimax's moves with percentages
     total_moves = np.sum(move_heatmap)
     move_heatmap_percentages = (move_heatmap / total_moves) * 100
 
-    sns.heatmap(move_heatmap_percentages, annot=True, fmt=".2f", cmap='coolwarm', ax=axs[1])
-    axs[1].set_title('Agent Move Heatmap (Percentages)')
-    axs[1].set_xlabel('Columns')
-    axs[1].set_ylabel('Rows')
+    sns.heatmap(move_heatmap_percentages, annot=True, fmt=".2f", cmap='coolwarm', ax=axs[1],
+                annot_kws={"size": 14, "weight": "bold"})  # Larger and bolder annotations on heatmap
+    axs[1].set_title('Minimax Move Heatmap (Percentages)', fontsize=18, fontweight='bold')
+    axs[1].set_xlabel('Columns', fontsize=16, fontweight='bold')
+    axs[1].set_ylabel('Rows', fontsize=16, fontweight='bold')
     plt.savefig('move_heatmap.svg', format='svg')
 
     plt.tight_layout()

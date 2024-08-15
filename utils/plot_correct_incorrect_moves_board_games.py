@@ -18,10 +18,6 @@ def read_experiment_data(base_path, games, models, conditions):
                 
                 with open(path, 'r') as file:
                     game_logs = json.load(file)
-
-                # Scale down data by dividing each value by 10 if specific conditions are met
-                if game in ['tictactoe', 'connectfour'] and model in ['gpt3.5','gpt3_5'] and condition == 'temp_0':
-                    game_logs = {key: value / 10 for key, value in game_logs.items()}
                     
                 model_results[condition] = {
                     'Wins': game_logs['P1 Wins'],

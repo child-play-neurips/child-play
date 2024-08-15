@@ -159,27 +159,32 @@ def run_game_series(game_instance, player1, player2, num_games, max_invalid_atte
 
     for i in range(num_games):
         if debug:
-            print(f"Game Iteration {i}")
+            print(f"Game Iteration {i + 1}")
             print(f"="*50)
         game_messages, wrong_moves, game_log, player = play_one_game(game_instance, player1, player2, size, debug=debug)
         all_game_messages.append(game_messages)
         all_game_logs.extend(game_log)  # Append the move log from each game
 
-        if player==0:
+        if player == 0:
             results['P1 Wins'] += 1
-        elif player==1:
+        elif player == 1:
             results['P2 Wins'] += 1
-        elif player==2:
+        elif player == 2:
             results['Ties'] += 1
 
         # Accumulate wrong move counts
         results['P1 Wrong Moves'] += wrong_moves[0]
         results['P2 Wrong Moves'] += wrong_moves[1]
 
+        # Early stopping if Player 2's wins are not being counted
+        if results['P2 Wins'] == 0 and results['P1 Wins'] + results['Ties'] > 10:
+            print(f"Stopping early: Player 2 (random player) has not won after {i + 1} games.")
+            break
+
     return results, all_game_messages, all_game_logs
 
 def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1, debug=False):
-    game_instance.reset_game()
+    game_instance.reset_board()
     
     players = [player1, player2]
     current_player_index = 0 if game_instance.current_player == "P1" else 1
@@ -223,11 +228,10 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
                     game_instance.game_over = True
                     winning_message = f"Game over. {players[1 - current_player_index].name} wins by default due to {current_player.name}'s repeated invalid moves."
                     collect_game_message(winning_message)
-                    break  # Break out of the inner while loop
+                    return game_messages, invalid_moves, move_log, 1 - current_player_index  # Correctly return the other player as the winner
             else:
                 invalid_attempts[current_player_index] = 0  # Reset on valid move
                 if game_instance.name == "shapes":
-                    # Log the chosen shape and the correct shape
                     move_log.append({
                         "player": current_player_index,
                         "chosen_shape": Shapes.answer_options[guess],  # the shape chosen by the player
@@ -235,7 +239,6 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
                         "turn": turn
                     })
                 else:
-                    # Existing logging for other games
                     move_log.append({
                         "player": current_player_index,
                         "move": guess,
@@ -250,15 +253,16 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
                 game_instance.game_over = True
                 winning_message = f"{players[1 - current_player_index].name} wins by default due to {current_player.name}'s repeated invalid moves."
                 collect_game_message(winning_message)
+                return game_messages, invalid_moves, move_log, 1 - current_player_index  # Correctly return the other player as the winner
 
         turn += 1
         if game_instance.game_over:
             final_state_message = game_instance.get_text_state(current_player_index)
             collect_game_message(final_state_message)
             if game_instance.check_win():
-                outcome_message = f"Congratulations, {current_player.name} wins!"
+                outcome_message = f"Congratulations, {players[current_player_index].name} wins!"  # Change the reference here
                 collect_game_message(f"Game Over. {outcome_message}")
-                return game_messages, invalid_moves, move_log, current_player_index
+                return game_messages, invalid_moves, move_log, current_player_index  # Return the correct player index
                 
             elif game_instance.check_tie():
                 outcome_message = "It's a tie!"
@@ -266,9 +270,9 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
                 return game_messages, invalid_moves, move_log, 2
                 
             elif game_instance.check_loss():
-                outcome_message=f"{current_player.name} loses"
+                outcome_message=f"{players[1 - current_player_index].name} loses"  # Adjust reference to the correct player
                 collect_game_message(f"Game Over. {outcome_message}")
-                return game_messages, invalid_moves, move_log, 1 - current_player_index # count as win for other player
+                return game_messages, invalid_moves, move_log, current_player_index # count as win for other player
                 
             collect_game_message("Game ended unexpectedly.")
             return game_messages, invalid_moves, move_log, -1
@@ -419,126 +423,120 @@ def load_and_aggregate_logs(path):
 def main():
 
     debug = True
-    """
-    player1 = RandomPlayer(0, "RanDom_1", debug=debug)
-    player2 = RandomPlayer(1, "RanDom_2", debug=debug)
-    
-    rollup_n = 3
-    gamedataset, game = play_random_moves(ConnectFour(options), rollup_n, debug=debug)
-    messages = play_one_game(game, player1, player2, debug=debug)
-
-    for i in range(len(gamedataset)):
-        messages.insert(i, gamedataset[i]["board_state"])
-
-    print(len(messages))
-    for m in messages:
-        print(m)
-    """
-
-    # game_runs = [
-    #     # {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'oa:gpt-3.5-turbo-1106',  'num_games': 1, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/square', 'temperature':0.5, 'shape': 'square'},
-    #     # {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'oa:gpt-3.5-turbo-1106',  'num_games': 1, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/triangle', 'temperature':0.5, 'shape': 'triangle'},
-    #     {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'ans:1',  'num_games': 10, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/triangle', 'temperature':0.5, 'shape': 'triangle'},
-    #     # {'game_class': Shapes, 'game_name': 'shapes', 'board_size': 15, 'model_name': 'oa:gpt-3.5-turbo-1106',  'num_games': 1, 'experiment_name': 'experiment_shapes/oa_gpt-3.5-turbo-1106/0_5/cross', 'temperature':0.5, 'shape': 'cross'},
-    #     # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt3_5_oneshot_temp_1', 'temperature': 1},
-    #     # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4-1106-preview', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4_oneshot_temp_1', 'temperature': 1},
-    # ]
-    
     game_runs = []
 
-    shapes = ['square', 'triangle', 'cross']
-    # models = ['oa:gpt-3.5-turbo-1106']
-    models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
-    temperatures = [0, 0.5, 1, 1.5]
-    num_games = 25
+    # Shapes experiment setup
+    shapes_experiments_enabled = False  # Set to False if you don't want to run shapes experiments
+    if shapes_experiments_enabled:
+        shapes = ['square', 'triangle', 'cross']
+        models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
+        temperatures = [0, 0.5, 1, 1.5]
+        num_games = 100
 
-    for model in models:
-        for temp in temperatures:
-            for shape in shapes:
-                game_runs.append({'game_class': Shapes, 'game_name': "shapes", 'board_size': 15, 'model_name': model,  'num_games': num_games, 'experiment_name': f'experiment_shapes/{model.replace(":", "_")}/{str(temp).replace(".", "_")}/{shape}', 'temperature':temp, 'shape': shape})
+        for model in models:
+            for temp in temperatures:
+                for shape in shapes:
+                    game_runs.append({
+                        'game_class': Shapes,
+                        'game_name': "shapes",
+                        'board_size': 15,
+                        'model_name': model,
+                        'num_games': num_games,
+                        'experiment_name': f'experiment_shapes/{model.replace(":", "_")}/{str(temp).replace(".", "_")}/{shape}',
+                        'temperature': temp,
+                        'shape': shape
+                    })
+
+    # Other games setup (e.g., Battleship, ConnectFour)
+    board_games_enabled = True  # Set to False if you don't want to run other games
+    if board_games_enabled:
+        game_runs += [
+        {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt3_5_oneshot_temp_0', 'temperature': 0},
+        {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt3_5_oneshot_temp_0', 'temperature': 0}
+        ]
+
+    if not game_runs:
+        print("No experiments to run. Please enable either shapes experiments, other games, or both.")
+        return
 
     aggregated_results = {'P1 Wins': 0, 'P2 Wins': 0, 'Ties': 0, 'P1 Wrong Moves': 0, 'P2 Wrong Moves': 0}
-
     total_time = 0
-    time_log_filename = "game_time_log.txt"  # Path to the file where time logs will be saved
+    time_log_filename = "game_time_log.txt"
 
     with open(time_log_filename, "a") as file:
 
         aggregated_logs = {}
 
         for game in game_runs:
-            if game['game_name'] == 'shapes':
-                folder_name = game['experiment_name']
-                os.makedirs(folder_name, exist_ok=True)
+            folder_name = game['experiment_name']
+            os.makedirs(folder_name, exist_ok=True)
 
-                game_instance = game['game_class'](options={"board_size": game['board_size']}, shape=game['shape'])
+            start_time = time.time()
+
+            # Here we are now creating an instance of the game instead of passing the class
+            game_instance = game['game_class'](options={"board_size": game['board_size']})
+
+            if game['game_name'] == 'shapes':
+                game_instance.shape = game['shape']
                 model_temp_key = (game['model_name'], game['temperature'])
 
                 if model_temp_key not in aggregated_logs:
                     aggregated_logs[model_temp_key] = []
 
+                player1 = LLMPlayer(game_instance, model_name=game['model_name'], temperature=game['temperature'], debug=debug)
+
+            else:
                 if game['model_name'] == 'random':
                     player1 = RandomPlayer(0, "Random", debug=debug)
                 else:
                     player1 = LLMPlayer(game_instance, model_name=game['model_name'], temperature=game['temperature'], debug=debug)
-                
-                player2 = RandomPlayer(1, "Random", debug=debug)
 
-                results, all_game_messages, all_game_logs = run_game_series(game_instance, player1, player2, game['num_games'], 1, game['board_size'], debug)
-                
-                save_dataset_to_json(results, folder_name + '/results.json')
-                save_dataset_to_json(all_game_messages, folder_name + '/game_messages.json')
-                save_dataset_to_json(all_game_logs, folder_name + '/game_logs.json')
+            player2 = RandomPlayer(1, "Random", debug=debug)
+            num_games = game['num_games']
 
-                # Aggregate logs for heatmap generation per model/temperature
+            results, all_game_messages, all_game_logs = run_game_series(game_instance, player1, player2, num_games, 1, game['board_size'], debug)
+
+            save_dataset_to_json(results, folder_name + '/results_' + game['game_name'] + '.json')
+            save_dataset_to_json(all_game_messages, folder_name + '/game_messages_' + game['game_name'] + '.json')
+            save_dataset_to_json(all_game_logs, folder_name + '/game_logs_' + game['game_name'] + '.json')
+
+            elapsed_time = time.time() - start_time
+            total_time += elapsed_time
+
+            file.write(f"Experiment: {game['game_name']}, Time: {elapsed_time:.2f} seconds\n")
+
+            for key in aggregated_results:
+                aggregated_results[key] += results[key]
+
+            if game['game_name'] == 'shapes':
                 aggregated_logs[model_temp_key].extend(all_game_logs)
 
-                for key in aggregated_results:
-                    aggregated_results[key] += results[key]
+        # Generate heatmaps for shapes experiments
+        if shapes_experiments_enabled:
+            base_path = 'experiment_shapes'
+            for model in models:
+                for temp in temperatures:
+                    all_moves = []
+                    base_path_model_temp = f"{base_path}/{model.replace(':', '_')}/{str(temp).replace('.', '_')}"
+                    
+                    for shape in shapes:
+                        shape_path = f"{base_path_model_temp}/{shape}"
+                        shape_moves = load_and_aggregate_logs(shape_path)
+                        all_moves.extend(shape_moves)
 
-        # Generate heatmaps for each model/temperature combination
-        base_path = f'experiment_shapes'
-        for model in models:
-            for temp in temperatures:
-                all_moves = []  # Initialize here to collect all moves across shapes
-                base_path_model_temp = f"{base_path}/{model.replace(':', '_')}/{str(temp).replace('.', '_')}"
-                
-                for shape in shapes:
-                    shape_path = f"{base_path_model_temp}/{shape}"
-                    shape_moves = load_and_aggregate_logs(shape_path)
-                    all_moves.extend(shape_moves)  # Extend the all_moves list with current shape moves
+                        shape_heatmap_path = f"{shape_path}/{model.replace(':', '_')}_{str(temp).replace('.', '_')}_{shape}_heatmap.png"
+                        plot_shapes_heatmap(shape_moves, shape_heatmap_path)
 
-                    # Generate heatmap for the current shape
-                    shape_heatmap_path = f"{shape_path}/{model.replace(':', '_')}_{str(temp).replace('.', '_')}_{shape}_heatmap.png"
-                    plot_shapes_heatmap(shape_moves, shape_heatmap_path)
+                    combined_heatmap_path = f"{base_path_model_temp}/{model.replace(':', '_')}_{str(temp).replace('.', '_')}_combined_heatmap.png"
+                    plot_shapes_heatmap(all_moves, combined_heatmap_path)
 
-                # Generate combined heatmap for the current model and temperature
-                combined_heatmap_path = f"{base_path_model_temp}/{model.replace(':', '_')}_{str(temp).replace('.', '_')}_combined_heatmap.png"
-                plot_shapes_heatmap(all_moves, combined_heatmap_path)
-
-
-        print("Heatmaps generated for all model/temperature conditions.")
+            print("Heatmaps generated for all model/temperature conditions in shapes experiments.")
 
         print(f"Aggregated Results after {sum(game['num_games'] for game in game_runs)} games:", aggregated_results)
-        print(aggregated_logs)
 
+    # If needed, bar plots for shapes experiments can also be generated
+    if shapes_experiments_enabled:
         bar_plot_shapes(base_path, models, temperatures, shapes)
-
-            # if not debug:
-            #     for i, messages in enumerate(all_game_messages):
-            #         print(f"\nGame {i+1} Messages:")
-            #         for message in messages:
-            #             print(message)
-    
-        # file.write(f"Total Time for All Experiments: {total_time:.2f} seconds\n")
-    
-    # Can be replaced with ConnectFour or BattleShip as needed
-    # gpt-3.5-turbo-0125 | gpt-3.5-turbo-1106 | gpt-4-1106-preview
-    # player1 = TextPlayer(0,  console_callback, "GPT 1", debug=debug)
-    # player1 = RandomPlayer(0, "RanDom 1", debug=debug)
-    # dataset = generate_game_dataset(TicTacToe(options), 10, 2)
-    # save_dataset_to_json(dataset, 'game_dataset.json')
-    # load_and_print_board_state('game_dataset.json',2)
 
 if __name__ == "__main__":
     main()

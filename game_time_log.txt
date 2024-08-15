@@ -1,0 +1,10 @@
+Experiment: connectfour, Time: 224.80 seconds
+Experiment: tictactoe, Time: 132.10 seconds
+Experiment: connectfour, Time: 216.01 seconds
+Experiment: tictactoe, Time: 136.67 seconds
+Experiment: connectfour, Time: 235.46 seconds
+Experiment: tictactoe, Time: 154.23 seconds
+Experiment: connectfour, Time: 204.25 seconds
+Experiment: tictactoe, Time: 128.58 seconds
+Experiment: connectfour, Time: 218.53 seconds
+Experiment: tictactoe, Time: 130.29 seconds

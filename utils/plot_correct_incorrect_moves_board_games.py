@@ -58,7 +58,7 @@ def prepare_dataframe(results, games, models, conditions):
     return {game: pd.DataFrame(data[game]) for game in games}
 
 def plot_results(df_dict):
-    plt.rcParams.update({'font.size': 12, 'font.weight': 'bold'})
+    plt.rcParams.update({'font.size': 18, 'font.weight': 'bold'})
 
     def add_labels(ax, bars):
         for bar in bars:
@@ -66,6 +66,7 @@ def plot_results(df_dict):
             ax.annotate(f'{int(width)}', xy=(width + ax.get_xlim()[1] * 0.01, bar.get_y() + bar.get_height() / 2),
                         xytext=(5, 0), textcoords='offset points', ha='left', va='center', fontweight='bold')
 
+    i = 0
     for game, df in df_dict.items():
         plt.figure(figsize=(14, 10))
         print(f"Plotting results for {game}")
@@ -86,13 +87,20 @@ def plot_results(df_dict):
             else:
                 ax.set_xlabel('')
             ax.set_ylabel('Temperature' if idx in [1, 3] else '')
-            if idx == 1:
-                ax.legend(title='Model', title_fontsize='13', loc='lower right')
+            if i == 2:
+                if idx == 1:
+                    ax.legend(title='Model', title_fontsize='13', loc='lower right')
+                else:
+                    ax.legend().set_visible(False)
             else:
-                ax.legend().set_visible(False)
+                if idx == 2:
+                    ax.legend(title='Model', title_fontsize='13', loc='upper right')
+                else:
+                    ax.legend().set_visible(False)
 
         plt.tight_layout()
         plt.show()
+        i += 1
 
 def main():
     base_path = '../experiment_board_games'

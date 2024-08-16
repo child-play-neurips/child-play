@@ -37,9 +37,9 @@ def plot_proportions(df_validity, df_construct):
                 yerr=model_data['Correct_SE'], capsize=5, error_kw={'capthick': 2})
 
     plt.xticks(temp_position + bar_width / 2, temperatures, weight='bold')
-    plt.title('Proportion of Correct Responses', weight='bold')
-    plt.ylabel('Proportion Correct', weight='bold')
-    plt.xlabel('Temperature', weight='bold')
+    plt.title('Proportion of Correct Responses', fontsize=20, weight='bold')
+    plt.ylabel('Proportion Correct', fontsize=20, weight='bold')
+    plt.xlabel('Temperature', fontsize=20, weight='bold')
     plt.legend()
 
     plt.subplot(1, 2, 2)
@@ -50,9 +50,9 @@ def plot_proportions(df_validity, df_construct):
                 yerr=model_data['Valid_SE'], capsize=5, error_kw={'capthick': 2})
 
     plt.xticks(temp_position + bar_width / 2, temperatures, weight='bold')
-    plt.title('Proportion of Valid Constructs', weight='bold')
-    plt.ylabel('Proportion Valid', weight='bold')
-    plt.xlabel('Temperature', weight='bold')
+    plt.title('Proportion of Valid Constructs', fontsize=20, weight='bold')
+    plt.ylabel('Proportion Valid', fontsize=20, weight='bold')
+    plt.xlabel('Temperature', fontsize=20, weight='bold')
     plt.legend()
 
     plt.tight_layout()

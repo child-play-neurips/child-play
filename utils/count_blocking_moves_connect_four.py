@@ -145,7 +145,7 @@ def plot_results(models, results, conditions):
     for i, measure in enumerate(['Average Moves', 'Missed Wins', 'Missed Blocks']):
         ax = plt.subplot(1, 3, i+1)
         unique_temperatures = df['Temperature'].unique().astype(str)
-        temp_positions = np.arange(len(unique_temperatures))
+        temp_positions = np.arange(len(unique_temperatures)) * 0.75
 
         offset = -bar_width * len(models) * 0.5  # Initialize offset
 
@@ -164,14 +164,14 @@ def plot_results(models, results, conditions):
                 offset += bar_width
                 
         ax.set_xticks(temp_positions)
-        ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
-        ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
+        ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=20, fontweight='bold')
+        ax.set_xlabel('Temperature', fontsize=20, fontweight='bold')
 
         ax.set_title(measure, fontsize=14, fontweight='bold')
         ax.set_ylabel('')  # Remove y-axis label
 
         if i == 2:  # Only add legend to the last plot
-            ax.legend()
+            ax.legend(title_fontsize='20', loc='upper right')
 
     plt.subplots_adjust(wspace=0.3)  # Increase space between plots
     plt.tight_layout()

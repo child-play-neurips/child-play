@@ -15,7 +15,6 @@ attrs
 backcall
 backoff
 baselines
-beautifulsoup4
 bleach
 blinker 
 Brotli 
@@ -54,8 +53,6 @@ frozenlist
 fsspec 
 gast
 glfw
-google-auth
-google-auth-oauthlib
 google-pasta
 grpcio
 gym-notices
@@ -80,13 +77,6 @@ jax
 jedi
 Jinja2
 jiter 
-jupyter
-jupyter-console
-jupyter-server
-jupyter_client
-jupyter_core
-jupyterlab-pygments
-jupyterlab-widgets
 keras
 kiwisolver
 libclang
@@ -108,12 +98,9 @@ nbclassic
 nbclient
 nbconvert
 nbformat
-nest-asyncio
-networkx
 ninja
 notebook
 notebook_shim
-numba
 numpy 
 nvidia-cublas-cu11
 nvidia-cuda-cupti-cu11
@@ -127,7 +114,6 @@ nvidia-cusparse-cu11
 nvidia-nccl-cu11
 nvidia-nvtx-cu11
 openai 
-openai-whisper 
 opencv-python
 opt-einsum
 overrides
@@ -151,8 +137,7 @@ pyasn1
 pyasn1-modules
 pycparser
 pydantic 
-pydantic_core 
-pygame
+pydantic_core
 Pygments
 pyinstaller
 pyinstaller-hooks-contrib

@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, request, jsonify
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
@@ -12,17 +13,29 @@ from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem import rdCoordGen
 from rdkit import Geometry
 import numpy as np
-from encryption_utils import encrypt_smiles, load_key, decrypt_smiles
+import Levenshtein
+import rdkit.DataStructs as rdd
 
 app = Flask(__name__)
 
-key = load_key()
+# Set up logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s [%(levelname)s] %(message)s',
+                    handlers=[
+                        logging.StreamHandler(),
+                        logging.FileHandler("app.log", mode='w')
+                    ])
+logger = logging.getLogger(__name__)
+
+generated_molecules = {}
+
+MAX_SMILES_LENGTH = 200  # Set a maximum reasonable length for a SMILES string
 
 def random_selfies(samples, length, min_atoms, max_atoms, alphabet):
-    random_selfies = ["".join(rd.choices(alphabet, k=length)) for _ in range(samples)]
     smiles_list = []
-    for si in random_selfies:
-        mol = rdc.MolFromSmiles(sf.decoder(si))
+    while len(smiles_list) < samples:
+        random_selfie = "".join(rd.choices(alphabet, k=length))
+        mol = rdc.MolFromSmiles(sf.decoder(random_selfie))
         if mol:
             num_atoms = mol.GetNumAtoms(onlyExplicit=False)
             if min_atoms <= num_atoms <= max_atoms:
@@ -132,11 +145,27 @@ def print_mol_ascii(mol):
     return "\n".join(ascii_representation)
 
 def calculate_similarity(smile1, smile2):
-    mol1 = rdc.MolFromSmiles(smile1)
-    mol2 = rdc.MolFromSmiles(smile2)
-    fp1 = rdMolDescriptors.GetMorganFingerprintAsBitVect(mol1, 2)
-    fp2 = rdMolDescriptors.GetMorganFingerprintAsBitVect(mol2, 2)
-    return Chem.DataStructs.FingerprintSimilarity(fp1, fp2)
+    try:
+        mol1 = rdc.MolFromSmiles(smile1)
+        mol2 = rdc.MolFromSmiles(smile2)
+        fpgen = rdca.GetMorganGenerator(radius=2)
+        fp1 = fpgen.GetSparseCountFingerprint(mol1)
+        fp2 = fpgen.GetSparseCountFingerprint(mol2)
+        similarity = rdd.DiceSimilarity(fp1, fp2)
+        return similarity
+    except Exception as e:
+        logger.warning(f"Chemical similarity calculation failed: {e}")
+        return -1  # Return -1 for invalid SMILES
+
+def calculate_string_distance(smile1, smile2):
+    """Calculate the Levenshtein distance between two SMILES strings."""
+    try:
+        canon1 = rdc.CanonSmiles(smile1)
+        canon2 = rdc.CanonSmiles(smile2)
+    except:
+        canon1 = smile1
+        canon2 = smile2
+    return Levenshtein.distance(canon1, canon2)
 
 @app.route('/generate_molecule', methods=['POST'])
 def generate_molecule():
@@ -144,47 +173,63 @@ def generate_molecule():
     length = data.get('length', 30)
     min_atoms = data.get('min_atoms', 10)
     max_atoms = data.get('max_atoms', 15)
-    format_type = data.get('format', 'ascii')  # 'ascii' or 'png'
+    format_type = data.get('format', 'ascii')
 
     alphabet = list(sf.get_semantic_robust_alphabet())
-    alphabet = [ai for ai in alphabet if ("+" not in ai) and ("-" not in ai)]  # Remove charged atoms
-    alphabet = [ai for ai in alphabet if ai not in ['[=B]', '[#B]', '[=P]', '[#P]', '[#S]', '[Cl]', '[Br]', '[I]']]  # Remove unusual atom types
+    alphabet = [ai for ai in alphabet if ("+" not in ai) and ("-" not in ai)]
+    alphabet = [ai for ai in alphabet if ai not in ['[=B]', '[#B]', '[=P]', '[#P]', '[#S]', '[Cl]', '[Br]', '[I]']]
 
     smiles_list = random_selfies(1, length, min_atoms, max_atoms, alphabet=alphabet)
     smile = smiles_list[0] if smiles_list else None
 
     if smile:
+        molecule_id = len(generated_molecules) + 1
+        generated_molecules[molecule_id] = smile
+        
+        logger.info(f"Generated SMILES (ID: {molecule_id})")
+
         mol = rdc.MolFromSmiles(smile)
         if format_type == 'png':
-            png_path = 'generated_molecule.png'
+            png_path = f'generated_molecule_{molecule_id}.png'
             draw_mol_coordgen(mol, png_path)
             with open(png_path, 'rb') as f:
                 img_data = f.read()
-            encrypted_smile = encrypt_smiles([smile], key)[0]  # Encrypting SMILES before sending it to storage
-            return jsonify({'image_data': img_data.decode('latin1'), 'encrypted_smile': encrypted_smile}), 200
+            return img_data, 200, {'Content-Type': 'image/png'}
         else:
             ascii_representation = print_mol_ascii(mol)
-            encrypted_smile = encrypt_smiles([smile], key)[0]  # Encrypting SMILES before sending it to storage
-            return jsonify({'ascii': ascii_representation, 'encrypted_smile': encrypted_smile}), 200
+            return jsonify({'ascii': ascii_representation, 'molecule_id': molecule_id}), 200
     else:
+        logger.error("Failed to generate a valid molecule.")
         return jsonify({'error': 'Failed to generate a molecule'}), 400
 
 @app.route('/evaluate_prediction', methods=['POST'])
 def evaluate_prediction():
     data = request.json
-    original_smile = decrypt_smiles([data.get('encrypted_smile')], key)[0]
+    molecule_id = data.get('molecule_id')
     predicted_smile = data.get('predicted_smile')
 
-    if not original_smile or not predicted_smile:
-        return jsonify({'error': 'Missing SMILES data'}), 400
+    # Validate the SMILES string length and content
+    if len(predicted_smile) > MAX_SMILES_LENGTH or not predicted_smile:
+        return jsonify({
+            "correct": False,
+            "chemical_similarity": 0.0,
+            "string_distance": -1
+        }), 200
+    
+    original_smile = generated_molecules.get(molecule_id)
+    if not original_smile:
+        return jsonify({'error': 'Invalid molecule ID'}), 400
+    
+    string_distance = calculate_string_distance(original_smile, predicted_smile)
+    chemical_similarity = calculate_similarity(original_smile, predicted_smile)
 
-    similarity = calculate_similarity(original_smile, predicted_smile)
     is_correct = original_smile == predicted_smile
-
+    
     return jsonify({
-        'correct': is_correct,
-        'similarity': similarity
-    })
+        "correct": is_correct,
+        "chemical_similarity": chemical_similarity,
+        "string_distance": string_distance,
+    }), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

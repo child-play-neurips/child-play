@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, jsonify, request
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
 import os
@@ -230,6 +230,10 @@ def evaluate_prediction():
         "chemical_similarity": chemical_similarity,
         "string_distance": string_distance,
     }), 200
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=False)

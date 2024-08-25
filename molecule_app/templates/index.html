@@ -21,12 +21,16 @@
         h1 {
             text-align: center;
         }
-        textarea {
+        pre#asciiRepresentation {
             width: 100%;
-            height: 150px;
             font-family: monospace;
             padding: 10px;
             margin: 10px 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            white-space: pre-wrap; /* Allows the text to wrap */
+            word-wrap: break-word;  /* Breaks long words to prevent overflow */
         }
         input[type="text"] {
             width: calc(100% - 22px);
@@ -79,7 +83,7 @@
         <button id="generateMoleculeButton">Generate Molecule</button>
 
         <h2>Step 2: View ASCII Representation</h2>
-        <textarea id="asciiRepresentation" readonly></textarea>
+        <pre id="asciiRepresentation" readonly></pre>
 
         <h2>Step 3: Predict the SMILES</h2>
         <input type="text" id="predictedSmiles" placeholder="Enter your predicted SMILES here">
@@ -119,16 +123,31 @@
                     format: 'ascii'
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                moleculeId = data.molecule_id;
-                document.getElementById('asciiRepresentation').value = data.ascii;
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                // Check if the response is JSON
+                return response.headers.get('Content-Type').includes('application/json') ? response.json() : response.text();
             })
-            .catch(error => console.error('Error:', error));
+            .then(data => {
+                if (typeof data === 'string') {
+                    // Handle case where server returns plain text (if any)
+                    console.error('Unexpected response:', data);
+                    alert('Failed to generate molecule.');
+                } else {
+                    moleculeId = data.molecule_id;
+                    document.getElementById('asciiRepresentation').textContent = data.ascii;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while generating the molecule.');
+            });
         });
 
         document.getElementById('evaluateButton').addEventListener('click', function() {
-            const predictedSmiles = document.getElementById('predictedSmiles').value;
+            const predictedSmiles = document.getElementById('predictedSmiles').value.trim();
 
             if (!moleculeId || !predictedSmiles) {
                 alert("Please generate a molecule and enter a predicted SMILES string.");
@@ -145,7 +164,12 @@
                     predicted_smile: predictedSmiles
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
                 trialNumber++;
                 const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
@@ -160,8 +184,8 @@
                 cell1.textContent = trialNumber;
                 cell2.textContent = predictedSmiles;
                 cell3.textContent = data.correct ? "Yes" : "No";
-                cell4.textContent = data.chemical_similarity.toFixed(2);
-                cell5.textContent = data.string_distance;
+                cell4.textContent = data.chemical_similarity !== undefined ? data.chemical_similarity.toFixed(2) : 'N/A';
+                cell5.textContent = data.string_distance !== undefined ? data.string_distance : 'N/A';
 
                 if (data.correct) {
                     cell3.classList.add('correct');
@@ -169,7 +193,10 @@
                     cell3.classList.add('incorrect');
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while evaluating the prediction.');
+            });
         });
     </script>
 </body>

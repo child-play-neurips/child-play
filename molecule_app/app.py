@@ -33,16 +33,24 @@ MAX_SMILES_LENGTH = 200  # Set a maximum reasonable length for a SMILES string
 
 def random_selfies(samples, length, min_atoms, max_atoms, alphabet):
     smiles_list = []
+    batch_size = 100  # Generate a batch of 100 SELFIES at once
     while len(smiles_list) < samples:
-        random_selfie = "".join(rd.choices(alphabet, k=length))
-        mol = rdc.MolFromSmiles(sf.decoder(random_selfie))
-        if mol:
-            num_atoms = mol.GetNumAtoms(onlyExplicit=False)
-            if min_atoms <= num_atoms <= max_atoms:
-                smiles = rdc.MolToSmiles(mol, kekuleSmiles=True)
-                cleaned_smiles = smiles.replace('#', '').replace('=', '')
-                if 'H' not in cleaned_smiles:
-                    smiles_list.append(cleaned_smiles)
+        selfie_batch = ["".join(rd.choices(alphabet, k=length)) for _ in range(batch_size)]
+        for random_selfie in selfie_batch:
+            decoded_smiles = sf.decoder(random_selfie)
+            mol = rdc.MolFromSmiles(decoded_smiles)
+            if mol:
+                num_atoms = mol.GetNumAtoms(onlyExplicit=False)
+                if min_atoms <= num_atoms <= max_atoms:
+                    # Additional validity checks
+                    if Chem.SanitizeMol(mol, catchErrors=True) == Chem.SanitizeFlags.SANITIZE_NONE:
+                        smiles = rdc.MolToSmiles(mol, kekuleSmiles=True)
+                        cleaned_smiles = smiles.replace('#', '').replace('=', '')
+                        if 'H' not in cleaned_smiles:
+                            smiles_list.append(cleaned_smiles)
+                            if len(smiles_list) >= samples:
+                                break
+        logger.info(f"Generated {len(smiles_list)} valid SMILES so far.")
     return smiles_list
 
 def draw_mol_coordgen(mol, save_path):
@@ -159,13 +167,13 @@ def calculate_similarity(smile1, smile2):
 
 def calculate_string_distance(smile1, smile2):
     """Calculate the Levenshtein distance between two SMILES strings."""
-    try:
-        canon1 = rdc.CanonSmiles(smile1)
-        canon2 = rdc.CanonSmiles(smile2)
-    except:
-        canon1 = smile1
-        canon2 = smile2
-    return Levenshtein.distance(canon1, canon2)
+    #try:
+    #    canon1 = rdc.CanonSmiles(smile1)
+    #    canon2 = rdc.CanonSmiles(smile2)
+    #except Exception as e:
+    #    logger.warning(f"SMILES canonicalization failed: {e}")
+    #    return -1  # Return -1 to indicate an error
+    return Levenshtein.distance(smile1, smile2)
 
 @app.route('/generate_molecule', methods=['POST'])
 def generate_molecule():
@@ -220,10 +228,17 @@ def evaluate_prediction():
     if not original_smile:
         return jsonify({'error': 'Invalid molecule ID'}), 400
     
-    string_distance = calculate_string_distance(original_smile, predicted_smile)
-    chemical_similarity = calculate_similarity(original_smile, predicted_smile)
+    try:
+        canon_original_smile = rdc.CanonSmiles(original_smile)
+        canon_predicted_smile = rdc.CanonSmiles(predicted_smile)
+    except Exception as e:
+        logger.warning(f"Canonicalization failed: {e}")
+        return jsonify({'error': 'SMILES canonicalization failed'}), 400
+    
+    string_distance = calculate_string_distance(canon_original_smile, canon_predicted_smile)
+    chemical_similarity = calculate_similarity(canon_original_smile, canon_predicted_smile)
 
-    is_correct = original_smile == predicted_smile
+    is_correct = canon_original_smile == canon_predicted_smile
     
     return jsonify({
         "correct": is_correct,

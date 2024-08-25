@@ -233,7 +233,11 @@ def evaluate_prediction():
         canon_predicted_smile = rdc.CanonSmiles(predicted_smile)
     except Exception as e:
         logger.warning(f"Canonicalization failed: {e}")
-        return jsonify({'error': 'SMILES canonicalization failed'}), 400
+        return jsonify({
+            "correct": False,
+            "chemical_similarity": -1,
+            "string_distance": calculate_string_distance(original_smile, predicted_smile),
+        }), 200
     
     string_distance = calculate_string_distance(canon_original_smile, canon_predicted_smile)
     chemical_similarity = calculate_similarity(canon_original_smile, canon_predicted_smile)

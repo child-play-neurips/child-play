@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMILES Benchmark Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            font-family: monospace;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        td.correct {
+            background-color: #c8e6c9;
+        }
+        td.incorrect {
+            background-color: #ffcdd2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SMILES Benchmark Tool</h1>
+
+        <h2>Step 1: Generate a Molecule</h2>
+        <button id="generateMoleculeButton">Generate Molecule</button>
+
+        <h2>Step 2: View ASCII Representation</h2>
+        <textarea id="asciiRepresentation" readonly></textarea>
+
+        <h2>Step 3: Predict the SMILES</h2>
+        <input type="text" id="predictedSmiles" placeholder="Enter your predicted SMILES here">
+        <button id="evaluateButton">Submit Prediction</button>
+
+        <h2>Results</h2>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Trial</th>
+                    <th>Predicted SMILES</th>
+                    <th>Correct</th>
+                    <th>Chemical Similarity</th>
+                    <th>String Distance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Results will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let moleculeId = null;
+        let trialNumber = 0;
+
+        document.getElementById('generateMoleculeButton').addEventListener('click', function() {
+            fetch('/generate_molecule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    length: 30,
+                    min_atoms: 10,
+                    max_atoms: 15,
+                    format: 'ascii'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                moleculeId = data.molecule_id;
+                document.getElementById('asciiRepresentation').value = data.ascii;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('evaluateButton').addEventListener('click', function() {
+            const predictedSmiles = document.getElementById('predictedSmiles').value;
+
+            if (!moleculeId || !predictedSmiles) {
+                alert("Please generate a molecule and enter a predicted SMILES string.");
+                return;
+            }
+
+            fetch('/evaluate_prediction', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    molecule_id: moleculeId,
+                    predicted_smile: predictedSmiles
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                trialNumber++;
+                const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
+                const newRow = resultsTable.insertRow();
+
+                const cell1 = newRow.insertCell(0);
+                const cell2 = newRow.insertCell(1);
+                const cell3 = newRow.insertCell(2);
+                const cell4 = newRow.insertCell(3);
+                const cell5 = newRow.insertCell(4);
+
+                cell1.textContent = trialNumber;
+                cell2.textContent = predictedSmiles;
+                cell3.textContent = data.correct ? "Yes" : "No";
+                cell4.textContent = data.chemical_similarity.toFixed(2);
+                cell5.textContent = data.string_distance;
+
+                if (data.correct) {
+                    cell3.classList.add('correct');
+                } else {
+                    cell3.classList.add('incorrect');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

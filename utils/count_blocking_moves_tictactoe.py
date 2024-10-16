@@ -156,7 +156,7 @@ def plot_results(models, results, conditions):
     for i, measure in enumerate(['Average Moves', 'Missed Wins', 'Missed Blocks']):
         ax = plt.subplot(1, 3, i+1)
         unique_temperatures = df['Temperature'].unique().astype(str)
-        temp_positions = np.arange(len(unique_temperatures)) * 0.5
+        temp_positions = np.arange(len(unique_temperatures))
 
         offset = -bar_width * len(models) * 0.5  # Initialize offset
 
@@ -164,20 +164,27 @@ def plot_results(models, results, conditions):
             for player_type in ['Model', 'Random']:
                 condition_data = df[(df['Model'] == model) & (df['Player'].str.contains(player_type))]
                 values = condition_data[measure].values
-
+                
                 if measure == 'Average Moves':
                     errors = condition_data.apply(lambda x: std_df[(std_df['Model'] == x['Model']) & (std_df['Temperature'] == x['Temperature'])]['Std'].iloc[0][measure], axis=1)
                     corrected_errors = np.where(values - errors < 0, values, errors)  # Avoid negative values
-                    ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
+                    if player_type == 'Random':
+                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'Random Player (vs {model})', yerr=corrected_errors, capsize=5)
+                    else:
+                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
                 else:
-                    ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}')
+                    if player_type == 'Random':
+                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'Random Player (vs {model})')
+                    else:
+                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}')
 
                 offset += bar_width
 
         ax.set_xticks(temp_positions)
-        ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=20, fontweight='bold')
-        ax.set_xlabel('Temperature', fontsize=20, fontweight='bold')
-        ax.set_title(measure, fontsize=20, fontweight='bold')
+        ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
+        ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
+
+        ax.set_title(measure, fontsize=14, fontweight='bold')
         ax.set_ylabel('')  # Remove y-axis label
 
         if i == 2:  # Only add legend to the last plot

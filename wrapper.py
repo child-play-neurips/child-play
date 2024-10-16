@@ -15,7 +15,7 @@
 import openai
 from openai import OpenAI
 
-openai.api_key = "YOURAPIKEY"
+openai.api_key = ""
 client = OpenAI(api_key=openai.api_key)
 
 # Hugging face imports

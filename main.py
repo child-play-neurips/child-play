@@ -429,8 +429,12 @@ def main():
     shapes_experiments_enabled = False  # Set to False if you don't want to run shapes experiments
     if shapes_experiments_enabled:
         shapes = ['square', 'triangle', 'cross']
-        models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
-        temperatures = [0, 0.5, 1, 1.5]
+        # models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
+        models = ['oa:gpt-4o-2024-08-06', 'oa:gpt-4o-mini-2024-07-18']
+
+        # temperatures = [0, 0.5, 1, 1.5]
+        temperatures = [0]
+
         num_games = 100
 
         for model in models:
@@ -451,8 +455,56 @@ def main():
     board_games_enabled = True  # Set to False if you don't want to run other games
     if board_games_enabled:
         game_runs += [
-        {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt3_5_oneshot_temp_0', 'temperature': 0},
-        {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt3_5_oneshot_temp_0', 'temperature': 0}
+            # gpt-4o-2024-08-06
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0', 'temperature': 0},
+            {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_0', 'temperature': 0},
+
+            # gpt-4o-mini-2024-07-18
+            {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
+            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
+            {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_0', 'temperature': 0}
+
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt3_5_oneshot_temp_0', 'temperature': 0}
+            # Mistral
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:mistralai/Mistral-7B-Instruct-v0.2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_mistral_7B_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'mistralai/Mistral-7B-Instruct-v0.2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_mistral_7B_oneshot_temp_0', 'temperature': 0},
+
+            # distilbert/distilgpt2
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:distilbert/distilgpt2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_distilgpt2_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:distilbert/distilgpt2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_distilgpt2_oneshot_temp_0', 'temperature': 0},
+
+            # # openai-community/gpt2
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:openai-community/gpt2', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_gpt2_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:openai-community/gpt2', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_gpt2_oneshot_temp_0', 'temperature': 0},
+
+            # tiiuae/falcon-mamba-7b
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:tiiuae/falcon-7b-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_falcon_mamba_7B_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:tiiuae/falcon-7b-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_falcon_mamba_7B_oneshot_temp_0', 'temperature': 0},
+
+            # # lmms-lab/llama3-llava-next-8b
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_llama3_llava_8B_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_llama3_llava_8B_oneshot_temp_0', 'temperature': 0},
+
+            # # meta-llama/Meta-Llama-3-8B
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:meta-llama/Meta-Llama-3-8B', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_llama_3_8B_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:meta-llama/Meta-Llama-3-8B', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_llama_3_8B_oneshot_temp_0', 'temperature': 0},
+
+            # # lmms-lab/llama3-llava-next-8b
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_llama3_llava_next_8b_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_llama3_llava_next_8b_oneshot_temp_0', 'temperature': 0},
+
+            # # xlnet/xlnet-base-cased
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:xlnet/xlnet-base-cased', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_xlnet_base_cased_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:xlnet/xlnet-base-cased', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_xlnet_base_cased_oneshot_temp_0', 'temperature': 0},
+
+            # # microsoft/Phi-3-mini-4k-instruct
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:microsoft/Phi-3-mini-4k-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_phi_3_mini_4k_instruct_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:microsoft/Phi-3-mini-4k-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_phi_3_mini_4k_instruct_oneshot_temp_0', 'temperature': 0},
+
+            # # google/gemma-2-9b-it
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:google/gemma-2-9b-it', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_gemma_2_9b_it_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:google/gemma-2-9b-it', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_gemma_2_9b_it_oneshot_temp_0', 'temperature': 0}
         ]
 
     if not game_runs:

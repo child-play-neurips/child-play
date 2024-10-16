@@ -1,0 +1,5 @@
+model,temperature,correct_count,incorrect_count,accuracy,f1_score,avg_chemical_similarity,avg_string_distance,incorrect_smiles_count
+oa:gpt-3.5-turbo-0125,0.0,0,100,0.0,0.0,-0.012512913829952224,8.66,14
+oa:gpt-3.5-turbo-0125,0.5,0,100,0.0,0.0,-0.02628390029527484,8.01,18
+oa:gpt-3.5-turbo-0125,1.0,0,100,0.0,0.0,0.013792112929293459,7.83,12
+oa:gpt-3.5-turbo-0125,1.5,0,100,0.0,0.0,-0.14970782075361636,11.48,27

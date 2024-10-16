@@ -31,7 +31,7 @@ def bar_plot_shapes(base_path, models, temperatures, shapes):
     plt.rcParams.update({'font.size': 20, 'font.weight': 'bold'})
     for model in models:
         fig, axes = plt.subplots(2, 2, figsize=(14, 12), sharey=True)
-        fig.suptitle(f'Correct and Incorrect Answers by Shape for {model}', fontsize=16, fontweight='bold')
+        fig.suptitle(f'', fontsize=16, fontweight='bold')
 
         axes = axes.flatten()
         for idx, temp in enumerate(temperatures):

@@ -3,6 +3,9 @@ import random
 
 class BattleShip:
     def __init__(self, options=None):
+        self.initialize_game(options)
+
+    def initialize_game(self, options=None):
         if options is None:
             self.board_size = 5
             options = {}
@@ -33,6 +36,10 @@ class BattleShip:
     @property
     def board(self):
         return self.guess_board_p1 if self.current_player == "P1" else self.guess_board_p2
+    
+    def reset_board(self):
+        """Resets the game to its initial state."""
+        self.initialize_game()
 
     def place_ships(self, ship_board: List[List[str]], ships_list: List[Tuple[int, int]]) -> None:
         """

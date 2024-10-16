@@ -1,8 +1,12 @@
 import openai
 from openai import OpenAI
 from transformers import pipeline
+from google.cloud import aiplatform
 
-openai.api_key = "YOUR_API_KEY"
+aiplatform.init(project="crafty-hall-429513-t0")
+
+openai.api_key = ""
+
 client = OpenAI(api_key=openai.api_key)
 
 def ask(api_messages, temperature, model):
@@ -24,6 +28,11 @@ def ask(api_messages, temperature, model):
         result = pipe(text_prompt)
         full_text = result[0]['generated_text']
         response = full_text[len(text_prompt):]
+    
+    elif origin == "vertex":
+        endpoint = aiplatform.Endpoint(endpoint_name=f"projects/your-gcp-project-id/locations/us-central1/endpoints/{specific_model}")
+        response = endpoint.predict(instances=[text_prompt], parameters={"temperature": temperature})
+        response = response.predictions[0]
 
     elif origin == "ans":
         response = specific_model

@@ -8,3 +8,11 @@ Experiment: connectfour, Time: 204.25 seconds
 Experiment: tictactoe, Time: 128.58 seconds
 Experiment: connectfour, Time: 218.53 seconds
 Experiment: tictactoe, Time: 130.29 seconds
+Experiment: connectfour, Time: 392.72 seconds
+Experiment: tictactoe, Time: 375.69 seconds
+Experiment: connectfour, Time: 408.85 seconds
+Experiment: tictactoe, Time: 404.78 seconds
+Experiment: connectfour, Time: 243.55 seconds
+Experiment: connectfour, Time: 20.71 seconds
+Experiment: connectfour, Time: 276.83 seconds
+Experiment: tictactoe, Time: 198.54 seconds

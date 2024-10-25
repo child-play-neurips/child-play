@@ -432,8 +432,8 @@ def main():
         # models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
         models = ['oa:gpt-4o-2024-08-06', 'oa:gpt-4o-mini-2024-07-18']
 
-        # temperatures = [0, 0.5, 1, 1.5]
-        temperatures = [0]
+        temperatures = [0, 0.5, 1, 1.5]
+        # temperatures = [0]
 
         num_games = 100
 
@@ -455,15 +455,42 @@ def main():
     board_games_enabled = True  # Set to False if you don't want to run other games
     if board_games_enabled:
         game_runs += [
-            # gpt-4o-2024-08-06
             # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0', 'temperature': 0},
             # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0', 'temperature': 0},
-            {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_0', 'temperature': 0},
-
+            
             # gpt-4o-mini-2024-07-18
-            {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
-            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
-            {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_0', 'temperature': 0}
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
+
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_0.5', 'temperature': 0.5},
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_0.5', 'temperature': 0.5},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_0.5', 'temperature': 0.5},
+
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_1', 'temperature': 1},
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_1', 'temperature': 1},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_1', 'temperature': 1},
+
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_1.5', 'temperature': 1.5},
+            {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_1.5', 'temperature': 1.5},
+            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_1.5', 'temperature': 1.5},
+            
+            # gpt-4o-2024-08-06
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0', 'temperature': 0},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0', 'temperature': 0}
+
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_0.5', 'temperature': 0.5},
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0.5', 'temperature': 0.5},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0.5', 'temperature': 0.5},
+
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_1', 'temperature': 1},
+            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_1', 'temperature': 1},
+            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_1', 'temperature': 1},
+
+            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_1.5', 'temperature': 1.5},
+            {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_1.5', 'temperature': 1.5},
+            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_1.5', 'temperature': 1.5}
 
             # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt3_5_oneshot_temp_0', 'temperature': 0}
             # Mistral

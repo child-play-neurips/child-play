@@ -20,6 +20,9 @@ class LCLVisualizer:
         ax.add_patch(patches.Rectangle(position, 4, 1, edgecolor='black', facecolor=color))
 
     def display_construct(self, pieces, filename):
+        if not pieces:
+            print(f"No pieces to display for {filename}. Skipping visualization.")
+            return
         fig, ax = plt.subplots()
         for piece in pieces:
             self.draw_piece(ax, (piece[0], piece[1]), piece[2])
@@ -134,8 +137,17 @@ class LCLGame:
         return self.pieces
 
     def is_valid_construct(self, pieces):
+        if not pieces:
+            return False  # An empty construct is considered invalid
         occupied_positions = {}
-        for x, y, color in pieces:
+        for piece in pieces:
+            if not isinstance(piece, tuple) or len(piece) != 3:
+                print(f"Invalid piece format: {piece}")
+                return False
+            x, y, color = piece
+            if not isinstance(x, int) or not isinstance(y, int) or not isinstance(color, str):
+                print(f"Invalid piece data types: {piece}")
+                return False
             # Create a set of x positions for each piece based on its width (4 studs)
             piece_positions = set(range(x, x + 4))
             if y in occupied_positions:
@@ -158,7 +170,6 @@ class LCLGame:
             while True:
                 self.pieces = self.generate_random_construct(num_pieces)
                 if not self.is_valid_construct(self.pieces):
-                    self.metrics["invalid_constructs"] += 1
                     print(f"Generated invalid construct: {self.pieces}")
                     return self.pieces
 
@@ -223,17 +234,27 @@ class LLMPlayer:
 
             if match:
                 # Use the captured group from the match, which is the content inside the brackets
-                content_to_evaluate = match.group(1)
+                content_to_evaluate = match.group(0)  # Include the brackets
                 print(f"Content to evaluate: {content_to_evaluate}")
                 # Evaluate the extracted string content
-                evaluated_response = ast.literal_eval(f'[{content_to_evaluate}]')
+                evaluated_response = ast.literal_eval(content_to_evaluate)
                 print(f"Evaluated response: {evaluated_response}")
+                # Check if evaluated_response is empty
+                if not evaluated_response:
+                    print("Evaluated response is empty, returning default invalid construct.")
+                    raise ValueError("Empty list")
+                # Flatten if necessary
+                if len(evaluated_response) == 1 and isinstance(evaluated_response[0], tuple) and all(isinstance(item, tuple) for item in evaluated_response[0]):
+                    # It's a list with one element, which is a tuple of tuples
+                    evaluated_response = list(evaluated_response[0])
+                    print(f"Flattened evaluated response: {evaluated_response}")
                 return evaluated_response
             else:
                 raise ValueError("Invalid format for list")
-        except (openai.InternalServerError, ValueError) as e:
+        except (openai.InternalServerError, ValueError, SyntaxError) as e:
             print(f"Error: {str(e)}")
-            return [(0, 0, 'red'), (0, 0, 'blue')]
+            # Return an invalid construct to count as a wrong answer
+            return [(0, 0, 'red'), (0, 0, 'red')]  # Overlapping pieces (invalid)
 
 def main():
     game = LCLGame()
@@ -242,8 +263,7 @@ def main():
     os.makedirs('./lcl_experiments/construct_generation', exist_ok=True)
 
     n_experiments = 100
-    models = ['oa:gpt-4-1106-preview', 'oa:gpt-3.5-turbo-1106']
-    # models = ["random", "oa:gpt-3.5-turbo-1106"]
+    models = ['oa:gpt-4o-2024-08-06', 'oa:gpt-4o-mini-2024-07-18']
 
     temperatures = [0, 0.5, 1, 1.5]
 
@@ -255,13 +275,39 @@ def main():
     for model in models:
         for temperature in temperatures:
             for i in range(n_experiments):
-                pieces = game.generate_valid_or_invalid_construct(n_pieces) if model == 'random' else LLMPlayer(model=model, temperature=temperature).generate_llm_answer_list(
-                    f"A description of a Lego structure consists of a list of tuples, [(x1, y1, 'color1'), (x2, y2, 'color2')], where each tuple shows the coordinates and colors of a piece. Such a structure is valid if all Lego pieces are connected but not overlapping. A Lego piece is connected through interlocking pegs, not by merely touching sides. Two Lego pieces overlap when they share the same y-coordinate and any part of their length has the same x-coordinate. Produce a description of a valid structure using {n_pieces} Lego pieces. Reply only with the Lego structure description following the format [(x1, y1, 'color1'), (x2, y2, 'color2'), ...], write nothing else but the structure.")
-                
+                if model == 'random':
+                    pieces = game.generate_valid_or_invalid_construct(n_pieces)
+                else:
+                    prompt = (
+                        f"A description of a Lego structure consists of a list of tuples, "
+                        f"[(x1, y1, 'color1'), (x2, y2, 'color2')], where each tuple shows the coordinates "
+                        f"and colors of a piece. Such a structure is valid if all Lego pieces are connected "
+                        f"but not overlapping. A Lego piece is connected through interlocking pegs, not by "
+                        f"merely touching sides. Two Lego pieces overlap when they share the same y-coordinate "
+                        f"and any part of their length has the same x-coordinate. Produce a description of a valid "
+                        f"structure using {n_pieces} Lego pieces. Reply only with the Lego structure description "
+                        f"following the format [(x1, y1, 'color1'), (x2, y2, 'color2'), ...], write nothing else "
+                        f"but the structure."
+                    )
+                    pieces = LLMPlayer(model=model, temperature=temperature).generate_llm_answer_list(prompt)
+
                 print(f"{model} answer: {pieces}")
-            
+
                 validity = game.is_valid_construct(pieces)
-                all_construct_results.append({"Temperature": temperature, "Model": model, "Experiment": i + 1, "Valid": validity, "LLM Response": pieces})
+
+                # Update the metrics based on validity
+                if validity:
+                    game.metrics["valid_constructs"] += 1
+                else:
+                    game.metrics["invalid_constructs"] += 1
+
+                all_construct_results.append({
+                    "Temperature": temperature,
+                    "Model": model,
+                    "Experiment": i + 1,
+                    "Valid": validity,
+                    "LLM Response": pieces
+                })
                 filename = f'./lcl_experiments/construct_generation/{model}_temp_{temperature}_experiment_{i+1}.svg'
                 visualizer.display_construct(pieces, filename)
 
@@ -270,25 +316,55 @@ def main():
         for temperature in temperatures:
             validity_results = []
             for i in range(n_experiments):
-                is_valid = i < n_experiments/2
+                is_valid = i < n_experiments / 2
                 pieces = game.generate_valid_or_invalid_construct(5, valid=is_valid)
-                player_answer = RandomPlayer().generate_random_answer() if model == 'random' else LLMPlayer(model=model, temperature=temperature).generate_llm_answer_validity(
-                    f"You will receive a description of a Lego structure, for instance, [(x1, y1, 'color1'), (x2, y2, 'color2')], which lists the coordinates and colors of two pieces. A construct is valid if all Lego pieces are connected but not overlapping. A Lego piece is connected through interlocking pegs, not by merely touching sides. Two Lego pieces overlap when they share the same y-coordinate and any part of their length has the same x-coordinate. If the following structure is valid then reply with valid, otherwise reply with invalid (do not justify your answer): {pieces}")
+                if model == 'random':
+                    player_answer = RandomPlayer().generate_random_answer()
+                else:
+                    prompt = (
+                        f"You will receive a description of a Lego structure, for instance, [(x1, y1, 'color1'), "
+                        f"(x2, y2, 'color2')], which lists the coordinates and colors of two pieces. A construct is "
+                        f"valid if all Lego pieces are connected but not overlapping. A Lego piece is connected through "
+                        f"interlocking pegs, not by merely touching sides. Two Lego pieces overlap when they share the "
+                        f"same y-coordinate and any part of their length has the same x-coordinate. If the following "
+                        f"structure is valid then reply with valid, otherwise reply with invalid (do not justify your "
+                        f"answer): {pieces}"
+                    )
+                    player_answer = LLMPlayer(model=model, temperature=temperature).generate_llm_answer_validity(prompt)
+
                 actual_validity = game.is_valid_construct(pieces)
                 correct = (player_answer == "valid" and actual_validity) or (player_answer == "invalid" and not actual_validity)
-                validity_results.append({"Temperature": temperature, "Model": model, "Experiment": i + 1, "Player Answer": player_answer, "Actual Validity": actual_validity, "Correct": correct, "LLM Response": pieces})
+
+                # Update the metrics
+                if correct:
+                    game.metrics["correct_validations"] += 1
+                else:
+                    game.metrics["incorrect_validations"] += 1
+
+                validity_results.append({
+                    "Temperature": temperature,
+                    "Model": model,
+                    "Experiment": i + 1,
+                    "Player Answer": player_answer,
+                    "Actual Validity": actual_validity,
+                    "Correct": correct,
+                    "LLM Response": pieces
+                })
                 filename = f'./lcl_experiments/validity_experiments/{model}_temp_{temperature}_experiment_{i+1}.png'
                 visualizer.display_construct(pieces, filename)
 
             all_validity_results.extend(validity_results)
 
-
     df_validity = pd.DataFrame(all_validity_results)
     df_construct = pd.DataFrame(all_construct_results)
-    df_construct.to_csv("df_construct.csv", index=False)
-    df_validity.to_csv("df_validity.csv", index=False)
-    print(df_validity[:10])
-    print(df_construct[:10])
+    df_construct.to_csv("df_construct_4o_experiments.csv", index=False)
+    df_validity.to_csv("df_validity_4o_experiments.csv", index=False)
+    print(df_validity.head(10))
+    print(df_construct.head(10))
+
+    # Save metrics to a file
+    game.save_metrics('lcl_experiments/metrics.json')
+    print("Final Metrics:", game.metrics)
 
 if __name__ == "__main__":
     main()

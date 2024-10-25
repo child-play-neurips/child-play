@@ -21,12 +21,12 @@ class BattleShip:
         self.ships_p1 = []
         self.ships_p2 = []
         self.ship_types = {
-            'Carrier': self.board_size,
-            'Battleship': max(1, self.board_size - 1),
-            'Cruiser': max(1, self.board_size - 2),
-            'Submarine': max(1, self.board_size - 3),
-            'Destroyer': max(1, self.board_size - 4)
+            'Cruiser': 2,
+            'Destroyer': 1
         }
+        max_ship_size = self.board_size
+        for i in range(max_ship_size, 0, -1):
+            self.ship_types[f'Ship_{i}'] = i
         self.place_ships(self.ship_board_p1, self.ships_p1)
         self.place_ships(self.ship_board_p2, self.ships_p2)
         self.game_over = False

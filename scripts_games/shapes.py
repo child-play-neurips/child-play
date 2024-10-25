@@ -195,9 +195,9 @@ class Shapes:
         self.name = "shapes"
         self.shape = shape
         self.prompt = f"Shapes is a game where you receive an {self.board_size} by {self.board_size} square matrix of {empty_character} and in it you will find a shape denoted by {full_character}. You will have multiple choices and you have to choose the correct option. Only output a number."
-        self.reset_game()
+        self.reset_board()
 
-    def reset_game(self):
+    def reset_board(self):
         self.board = create_board(self.board_size, self.board_size)
 
         # Draw a square randomly

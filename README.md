@@ -9,9 +9,10 @@ The ChildPlay Repository hosts the ChildPlay benchmark suite, introduced at the 
 ├── experiment_shapes<br />
 ├── imgs<br />
 ├── lcl_experiments<br />
-├── lcl.py<br />
-├── logs<br />
+├── molecule_app<br />
 ├── new_heatmaps<br />
+├── main_shapes<br />
+├── lcl.py<br />
 ├── scripts_games<br />
 ├── utils<br />
 ├── main.py<br />
@@ -38,6 +39,7 @@ The ChildPlay benchmark includes a series of games encoded in various formats, i
 - **Battleship**
 - **Shapes**
 - **LCL**
+- **GTS**
 
 Each game is accompanied by its initial configuration, and rules to provide a comprehensive testing framework.
 
@@ -48,7 +50,7 @@ For example, to run a shapes experiment:
 game_runs = []
 
 shapes = ['square', 'triangle', 'cross']
-models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
+models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview', 'oa:gpt-4o-2024-08-06', 'oa:gpt-4o-mini-2024-07-18']
 temperatures = [0, 0.5, 1, 1.5]
 num_games = 25
 
@@ -255,3 +257,193 @@ Data from each game session is structured in JSON format, where logs of moves an
 - **Education**: Can be used in educational settings for demonstrating basic AI concepts and programming practices.
 - **AI Testing**: Provides a controlled environment for testing AI algorithms in decision-making scenarios.
 
+## GTS: Guess-the-SMILES
+
+The **Guess-the-SMILES (GTS)** game is a molecule identification game designed to test large language models' ability to interpret structural data and predict chemical representations. This game challenges the model to convert a graphical or ASCII depiction of a molecule into its corresponding SMILES (Simplified Molecular Input Line Entry System) notation.
+
+### Game Mechanics
+
+- **Molecule Generation**: Random molecular structures are generated using the SELFIES (Self-Referencing Embedded Strings) encoding, with constraints on the minimum and maximum number of atoms to ensure valid and complex molecules.
+- **Display Format**: Molecules are presented either as ASCII art or PNG images, displaying the molecular structure using atomic symbols and bond representations.
+- **Player Interaction**: Models are tasked with interpreting the ASCII or image representation of the molecule and providing the correct SMILES string.
+- **Evaluation**: The provided SMILES string is evaluated for correctness, chemical similarity, and string distance to the original SMILES.
+
+You can play the game here: [GTS website](https://child-play.onrender.com/).
+Note that the code is not accessible as this is supposed to be a blind experiment.
+
+
+## Guess-the-SMILES Public API Documentation
+
+**Base URL:** `https://child-play.onrender.com/`
+
+The **Guess-the-SMILES API** allows users to generate molecular representations and evaluate their SMILES predictions based on ASCII drawings of molecules.
+
+### Endpoints
+
+---
+
+### 1. Generate Molecule
+
+- **URL:** `/generate_molecule`
+- **Method:** `POST`
+- **Description:** Generates a random molecule and returns its ASCII representation or PNG image along with a unique `molecule_id`.
+
+#### Request Parameters:
+
+| Parameter | Type    | Description                                  | Default   |
+|-----------|---------|----------------------------------------------|-----------|
+| length    | Integer | Number of SELFIES characters in the string   | 30        |
+| min_atoms | Integer | Minimum number of atoms in the molecule      | 10        |
+| max_atoms | Integer | Maximum number of atoms in the molecule      | 15        |
+| format    | String  | Desired output format: `"ascii"` or `"png"`  | `"ascii"` |
+
+#### Request Body Example:
+
+```json
+{
+  "length": 30,
+  "min_atoms": 10,
+  "max_atoms": 15,
+  "format": "ascii"
+}
+```
+
+#### Responses:
+
+- **Success (ASCII Format):**
+
+  - **Status Code:** `200 OK`
+  - **Body:**
+    ```json
+    {
+      "ascii": "  C - C - O
+   |   |
+   N - C",
+      "molecule_id": 1
+    }
+    ```
+
+- **Success (PNG Format):**
+
+  - **Status Code:** `200 OK`
+  - **Headers:**
+    ```
+    Content-Type: image/png
+    ```
+  - **Body:** Binary PNG image data.
+
+- **Error:**
+
+  - **Status Code:** `400 Bad Request`
+  - **Body:**
+    ```json
+    {
+      "error": "Failed to generate a molecule"
+    }
+    ```
+
+---
+
+### 2. Evaluate Prediction
+
+- **URL:** `/evaluate_prediction`
+- **Method:** `POST`
+- **Description:** Evaluates a predicted SMILES string against the original molecule using `molecule_id`.
+
+#### Request Parameters:
+
+| Parameter       | Type   | Description                      | Required |
+|-----------------|--------|----------------------------------|----------|
+| molecule_id     | Integer| ID of the generated molecule     | Yes      |
+| predicted_smile | String | User's predicted SMILES string   | Yes      |
+
+#### Request Body Example:
+
+```json
+{
+  "molecule_id": 1,
+  "predicted_smile": "C1=CC=CC=C1"
+}
+```
+
+#### Responses:
+
+- **Success:**
+
+  - **Status Code:** `200 OK`
+  - **Body:**
+    ```json
+    {
+      "correct": true,
+      "chemical_similarity": 1.0,
+      "string_distance": 0
+    }
+    ```
+
+  - **Fields:**
+    - `correct`: Indicates if the prediction matches the original SMILES.
+    - `chemical_similarity`: Dice similarity score between original and predicted SMILES.
+    - `string_distance`: Levenshtein distance between original and predicted SMILES.
+
+- **Error:**
+
+  - **Status Code:** `400 Bad Request`
+  - **Body:**
+    ```json
+    {
+      "error": "Invalid molecule ID"
+    }
+    ```
+
+---
+
+### Usage Examples
+
+#### 1. Generate an ASCII Molecule
+
+**Request:**
+
+```bash
+curl -X POST https://child-play.onrender.com/generate_molecule      -H "Content-Type: application/json"      -d '{"format": "ascii"}'
+```
+
+**Response:**
+
+```json
+{
+  "ascii": "  C - C - O
+   |   |
+   N - C",
+  "molecule_id": 1
+}
+```
+
+#### 2. Generate a PNG Image
+
+**Request:**
+
+```bash
+curl -X POST https://child-play.onrender.com/generate_molecule      -H "Content-Type: application/json"      -d '{"format": "png"}' --output molecule.png
+```
+
+**Response:**
+
+- Saves the PNG image as `molecule.png`.
+
+#### 3. Evaluate a SMILES Prediction
+
+**Request:**
+
+```bash
+curl -X POST https://child-play.onrender.com/evaluate_prediction      -H "Content-Type: application/json"      -d '{"molecule_id": 1, "predicted_smile": "C1=CC=CC=C1"}'
+```
+
+**Response:**
+
+```json
+{
+  "correct": true,
+  "chemical_similarity": 1.0,
+  "string_distance": 0
+}
+```

@@ -37,8 +37,7 @@ class LLMPlayer(PlayerBase):
         self.game = game
         self.temperature = temperature
         self.interaction_count = 0
-        print(type(self.game))
-        print(self.game)
+        print(f"[LLMPlayer Init] Game Type: {type(self.game)}, Game Instance: {self.game}")
 
     def print_details(self):
         print(f"Model Name: {self.model_name}")
@@ -56,6 +55,7 @@ class LLMPlayer(PlayerBase):
             print(f"  Role: {message['role']}")
             print(f"  Content: {message['content']}")
             print("-" * 60)
+        print("=" * 50)
 
     def make_guess(self, game, previous_play):
         api_messages = [{"role": "system", "content": f"You are a player in a game of {self.game.name}. {self.game.prompt}."}]
@@ -63,14 +63,15 @@ class LLMPlayer(PlayerBase):
         prompt = f"Player {self.player_id + 1} ({self.player_name}), it's your turn. Here's the current game state:\n{current_state}\nMy move is: "
         user_message = {"role": "user", "content": f"{prompt}"}
         
-        self.collect_message(user_message)
+        self.collect_message(f"System Message: {user_message['content']}")
         api_messages.append(user_message)
 
         if self.debug:
-            print(f"\nPrompt to LLM:\n{prompt}")
+            print(f"\n[LLMPlayer] Prompt to LLM:\n{prompt}")
 
         response = ask(api_messages=api_messages, temperature=self.temperature, model=self.model_name)
         self.collect_message(f"LLM Response:\n{response}")
+        print(f"\n[LLMPlayer] Received Response from Model:\n{response}\n")
         api_messages.append({"role": "user", "content": f"Your Response:\n{response}"})
 
         return self.parse_move(response, game)
@@ -83,14 +84,26 @@ class LLMPlayer(PlayerBase):
                 return guess
             elif game.name == "connectfour":
                 col = int(response)
-                return col if 0 <= col < game.cols and game.board[0][col] == '.' else None
+                if 0 <= col < game.cols and game.board[0][col] == '.':
+                    return col
+                else:
+                    self.collect_message(f"Invalid move by {self.name}: Column {col} is full or out of range.")
+                    print(f"[LLMPlayer] Invalid move: Column {col} is full or out of range.")
+                    return None
             else:
                 row, col = map(int, response.split())
-                return (row, col) if 0 <= row < game.board_size and 0 <= col < game.board_size and game.board[row][col] in [" ", "~", "S"] else None
+                if (0 <= row < game.board_size and 0 <= col < game.board_size and 
+                    game.board[row][col] in [" ", "~", "S"]):
+                    return (row, col)
+                else:
+                    self.collect_message(f"Invalid move by {self.name}: Position ({row}, {col}) is occupied or out of range.")
+                    print(f"[LLMPlayer] Invalid move: Position ({row}, {col}) is occupied or out of range.")
+                    return None
         except ValueError:
             self.collect_message("Failed to parse move, please provide only the required text and nothing else. Previous response: " + response)
+            print(f"[LLMPlayer] Failed to parse move. Response was: {response}")
             return None
-    
+
 class TextPlayer(PlayerBase):
     def __init__(self, player_id, callback, name, debug=False):
         super().__init__(player_id, name, debug)
@@ -105,6 +118,7 @@ class TextPlayer(PlayerBase):
                 # Attempt to parse the input according to the expected format
                 if game.name == "shapes":
                     guess = int(text_guess)
+                    print(f"Player chose:{guess}")
                     return guess
                 elif game.name in ["connectfour"]:
                     col = int(text_guess)
@@ -115,28 +129,48 @@ class TextPlayer(PlayerBase):
             except (ValueError, IndexError):
                 # If input parsing fails or doesn't meet the criteria, inform the player and allow another attempt
                 self.collect_message("Invalid input. Please enter the column number for ConnectFour or row and column numbers separated by a space for other games.")
+                print("[TextPlayer] Invalid input format.")
                 return None  # Signaling `play_one_game` to handle this as an invalid move
-            
+
 class RandomPlayer(PlayerBase):
     def __init__(self, player_id, name, debug=False):
         super().__init__(player_id, name, debug)
 
     def make_guess(self, game, previous_play=""):
         if game.name == "shapes":
-            return random.randint(0, 3)
+            guess = random.randint(0, 3)
+            print(f"[RandomPlayer] Chose shape index: {guess}")
+            return guess
         elif game.name == "connectfour":
             # For ConnectFour, find columns that are not full
             available_cols = [col for col in range(game.cols) if game.board[0][col] == '.']
-            return random.choice(available_cols)
+            if available_cols:
+                chosen_col = random.choice(available_cols)
+                print(f"[RandomPlayer] Chose column: {chosen_col}")
+                return chosen_col
+            else:
+                print("[RandomPlayer] No available columns to choose.")
+                return None
         elif game.name == "tictactoe":
-            
             # For TicTacToe, find empty positions on the board
             available_moves = [(row, col) for row in range(game.board_size) for col in range(game.board_size) if game.board[row][col] == " "]
-            return random.choice(available_moves)
+            if available_moves:
+                chosen_move = random.choice(available_moves)
+                print(f"[RandomPlayer] Chose move: {chosen_move}")
+                return chosen_move
+            else:
+                print("[RandomPlayer] No available moves to choose.")
+                return None
         elif game.name == "battleship":
             guess_board = game.guess_board_p1 if self.player_id == 0 else game.guess_board_p2
             available_moves = [(row, col) for row in range(game.board_size) for col in range(game.board_size) if guess_board[row][col] == "~"]
-            return random.choice(available_moves)
+            if available_moves:
+                chosen_move = random.choice(available_moves)
+                print(f"[RandomPlayer] Chose Battleship guess: {chosen_move}")
+                return chosen_move
+            else:
+                print("[RandomPlayer] No available Battleship moves to choose.")
+                return None
 
 def run_game_series(game_instance, player1, player2, num_games, max_invalid_attempts, size, debug=False):
     """
@@ -152,6 +186,7 @@ def run_game_series(game_instance, player1, player2, num_games, max_invalid_atte
     Returns:
     - results: A dictionary with the tally of results ('P1 Wins', 'P2 Wins', 'Ties').
     - all_game_messages: A list containing the messages from each game played.
+    - all_game_logs: A list containing detailed move logs for each game.
     """
     results = {'P1 Wins': 0, 'P2 Wins': 0, 'Ties': 0, 'P1 Wrong Moves': 0, 'P2 Wrong Moves': 0}
     all_game_messages = []
@@ -159,18 +194,25 @@ def run_game_series(game_instance, player1, player2, num_games, max_invalid_atte
 
     for i in range(num_games):
         if debug:
-            print(f"Game Iteration {i + 1}")
-            print(f"="*50)
-        game_messages, wrong_moves, game_log, player = play_one_game(game_instance, player1, player2, size, debug=debug)
+            print(f"\n=== Starting Game {i + 1} ===")
+            print(f"{'='*50}")
+        game_instance.reset_board()
+        game_messages, wrong_moves, game_log, player = play_one_game(game_instance, player1, player2, size, max_invalid_attempts, debug=debug)
         all_game_messages.append(game_messages)
         all_game_logs.extend(game_log)  # Append the move log from each game
 
         if player == 0:
             results['P1 Wins'] += 1
+            if debug:
+                print(f"Result: {player1.name} Wins")
         elif player == 1:
             results['P2 Wins'] += 1
+            if debug:
+                print(f"Result: {player2.name} Wins")
         elif player == 2:
             results['Ties'] += 1
+            if debug:
+                print("Result: Tie")
 
         # Accumulate wrong move counts
         results['P1 Wrong Moves'] += wrong_moves[0]
@@ -178,7 +220,7 @@ def run_game_series(game_instance, player1, player2, num_games, max_invalid_atte
 
         # Early stopping if Player 2's wins are not being counted
         if results['P2 Wins'] == 0 and results['P1 Wins'] + results['Ties'] > 10:
-            print(f"Stopping early: Player 2 (random player) has not won after {i + 1} games.")
+            print(f"Stopping early: Player 2 (Random Player) has not won after {i + 1} games.")
             break
 
     return results, all_game_messages, all_game_logs
@@ -190,7 +232,7 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
     current_player_index = 0 if game_instance.current_player == "P1" else 1
     game_messages = []
     invalid_attempts = [0, 0]  # Track invalid attempts for both players
-    invalid_moves = [0, 0]
+    wrong_moves = [0, 0]  # Track wrong moves (both invalid and incorrect) for both players
     move_log = []
     turn = 0
     
@@ -201,15 +243,16 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
             print(message)
 
     collect_game_message(game_instance.prompt)
+    print(f"[Game Start] {game_instance.prompt}")
 
     previous_play = ""
 
     while not game_instance.game_over:
         current_player = players[current_player_index]
 
-        # Loop to handle repeated invalid moves without switching player
         collect_game_message(game_instance.get_text_state(current_player_index))
         collect_game_message(f"{current_player.name}'s turn to guess.")
+        print(f"\n[Turn {turn + 1}] {current_player.name}'s turn.")
 
         guess = current_player.make_guess(game_instance, previous_play)
 
@@ -218,69 +261,84 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
         if guess is not None:  # Proceed if a guess was made
             message, valid_move = game_instance.guess(current_player_index, guess, current_player)
             collect_game_message(message)
+            print(f"[Move] {message}")
 
             if not valid_move:
                 invalid_attempts[current_player_index] += 1
-                invalid_moves[current_player_index] += 1
+                wrong_moves[current_player_index] += 1  # Count invalid move as wrong move
 
                 if invalid_attempts[current_player_index] >= max_invalid_attempts:
                     # End game if max invalid attempts are exceeded
                     game_instance.game_over = True
                     winning_message = f"Game over. {players[1 - current_player_index].name} wins by default due to {current_player.name}'s repeated invalid moves."
                     collect_game_message(winning_message)
-                    return game_messages, invalid_moves, move_log, 1 - current_player_index  # Correctly return the other player as the winner
+                    print(f"[Game Over] {winning_message}")
+                    return game_messages, wrong_moves, move_log, 1 - current_player_index  # Other player wins
             else:
                 invalid_attempts[current_player_index] = 0  # Reset on valid move
                 if game_instance.name == "shapes":
-                    move_log.append({
-                        "player": current_player_index,
-                        "chosen_shape": Shapes.answer_options[guess],  # the shape chosen by the player
-                        "correct_shape": game_instance.shape,  # the actual shape on the board
-                        "turn": turn
-                    })
+                    if message == "Win":
+                        move_log.append({
+                            "player": current_player_index,
+                            "chosen_shape": game_instance.answer_options[guess],
+                            "correct_shape": game_instance.shape,
+                            "turn": turn,
+                            "result": "Win"
+                        })
+                    elif message == "Loss":
+                        move_log.append({
+                            "player": current_player_index,
+                            "chosen_shape": game_instance.answer_options[guess],
+                            "correct_shape": game_instance.shape,
+                            "turn": turn,
+                            "result": "Loss"
+                        })
+                        wrong_moves[current_player_index] += 1  # Count incorrect guess as wrong move
+            # Handle game over state
+            if game_instance.game_over:
+                final_state_message = game_instance.get_text_state(current_player_index)
+                collect_game_message(final_state_message)
+                print(f"[Final State]\n{final_state_message}")
+                if game_instance.check_win():
+                    outcome_message = f"Congratulations, {players[current_player_index].name} wins!"
+                    collect_game_message(f"Game Over. {outcome_message}")
+                    print(f"[Game Over] {outcome_message}")
+                    return game_messages, wrong_moves, move_log, current_player_index
+                elif game_instance.check_tie():
+                    outcome_message = "It's a tie!"
+                    collect_game_message(f"Game Over. {outcome_message}")
+                    print(f"[Game Over] {outcome_message}")
+                    return game_messages, wrong_moves, move_log, 2
+                elif game_instance.check_loss():
+                    outcome_message = f"{players[1 - current_player_index].name} loses."
+                    collect_game_message(f"Game Over. {outcome_message}")
+                    print(f"[Game Over] {outcome_message}")
+                    return game_messages, wrong_moves, move_log, current_player_index
                 else:
-                    move_log.append({
-                        "player": current_player_index,
-                        "move": guess,
-                        "turn": turn
-                    })
-            
+                    collect_game_message("Game ended unexpectedly.")
+                    print("[Game Over] Game ended unexpectedly.")
+                    return game_messages, wrong_moves, move_log, -1
+
         else:  # Handle case where guess is None (invalid input not leading to a guess)
             invalid_attempts[current_player_index] += 1
-            invalid_moves[current_player_index] += 1
+            wrong_moves[current_player_index] += 1  # Count as wrong move
             if invalid_attempts[current_player_index] >= max_invalid_attempts:
                 # End game if max invalid attempts are exceeded
                 game_instance.game_over = True
                 winning_message = f"{players[1 - current_player_index].name} wins by default due to {current_player.name}'s repeated invalid moves."
                 collect_game_message(winning_message)
-                return game_messages, invalid_moves, move_log, 1 - current_player_index  # Correctly return the other player as the winner
+                print(f"[Game Over] {winning_message}")
+                return game_messages, wrong_moves, move_log, 1 - current_player_index  # Other player wins
 
         turn += 1
-        if game_instance.game_over:
-            final_state_message = game_instance.get_text_state(current_player_index)
-            collect_game_message(final_state_message)
-            if game_instance.check_win():
-                outcome_message = f"Congratulations, {players[current_player_index].name} wins!"  # Change the reference here
-                collect_game_message(f"Game Over. {outcome_message}")
-                return game_messages, invalid_moves, move_log, current_player_index  # Return the correct player index
-                
-            elif game_instance.check_tie():
-                outcome_message = "It's a tie!"
-                collect_game_message(f"Game Over. {outcome_message}")
-                return game_messages, invalid_moves, move_log, 2
-                
-            elif game_instance.check_loss():
-                outcome_message=f"{players[1 - current_player_index].name} loses"  # Adjust reference to the correct player
-                collect_game_message(f"Game Over. {outcome_message}")
-                return game_messages, invalid_moves, move_log, current_player_index # count as win for other player
-                
-            collect_game_message("Game ended unexpectedly.")
-            return game_messages, invalid_moves, move_log, -1
+        if not game_instance.game_over:
+            current_player_index = 1 - current_player_index  # Switch turns only after valid move or game over
 
-        current_player_index = 1 - current_player_index  # Switch turns only after valid move or game over
+    # Fallback return in case game_over is not set correctly
+    return game_messages, wrong_moves, move_log, -1
 
 def play_random_moves(game, iter, debug=False):
-    players = [RandomPlayer(0, "Random 1"), RandomPlayer(1, "Random 2")]
+    players = [RandomPlayer(0, "Random 1", debug=debug), RandomPlayer(1, "Random 2", debug=debug)]
     current_player_index = 0
     game_dataset = []
 
@@ -303,9 +361,8 @@ def play_random_moves(game, iter, debug=False):
                 })
                 moves_played += 1
                 if debug:
-                    print(current_player.name)
-                    print(guess)
-                    print(game_state)
+                    print(f"[Random Move] Player: {current_player.name}, Move: {guess}")
+                    print(f"[Game State]\n{game_state}")
     
         current_player_index = 1 - current_player_index
 
@@ -375,10 +432,10 @@ def plot_heatmap(all_moves, n_games, game_name, board_size, players, save_path="
     for move_info in all_moves:
         player_index = move_info["player"]
         move = move_info["move"]
-        # if game_name == "shapes":
-        #     chosen_index, correct_shape = move_info["move"]
-        #     correct_index = Shapes.answer_options.index(correct_shape)
-        #     heatmaps[player_index][correct_index, chosen_index] += 1
+        if game_name == "shapes":
+            chosen_index, correct_shape = move_info["move"]
+            correct_index = Shapes.answer_options.index(correct_shape)
+            heatmaps[player_index][correct_index, chosen_index] += 1
         if game_name == "connectfour":
             # For ConnectFour, increment column based on move
             heatmaps[player_index][0, move] += 1
@@ -422,11 +479,11 @@ def load_and_aggregate_logs(path):
 
 def main():
 
-    debug = True
+    debug = True  # Ensure debug mode is enabled to see model outputs
     game_runs = []
 
     # Shapes experiment setup
-    shapes_experiments_enabled = False  # Set to False if you don't want to run shapes experiments
+    shapes_experiments_enabled = True  # Set to False if you don't want to run shapes experiments
     if shapes_experiments_enabled:
         shapes = ['square', 'triangle', 'cross']
         # models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
@@ -452,7 +509,7 @@ def main():
                     })
 
     # Other games setup (e.g., Battleship, ConnectFour)
-    board_games_enabled = True  # Set to False if you don't want to run other games
+    board_games_enabled = False  # Set to False if you don't want to run other games
     if board_games_enabled:
         game_runs += [
             # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0', 'temperature': 0},
@@ -575,14 +632,15 @@ def main():
 
             results, all_game_messages, all_game_logs = run_game_series(game_instance, player1, player2, num_games, 1, game['board_size'], debug)
 
-            save_dataset_to_json(results, folder_name + '/results_' + game['game_name'] + '.json')
-            save_dataset_to_json(all_game_messages, folder_name + '/game_messages_' + game['game_name'] + '.json')
-            save_dataset_to_json(all_game_logs, folder_name + '/game_logs_' + game['game_name'] + '.json')
+            save_dataset_to_json(results, os.path.join(folder_name, f'results_{game["game_name"]}.json'))
+            save_dataset_to_json(all_game_messages, os.path.join(folder_name, f'game_messages_{game["game_name"]}.json'))
+            save_dataset_to_json(all_game_logs, os.path.join(folder_name, f'game_logs_{game["game_name"]}.json'))
 
             elapsed_time = time.time() - start_time
             total_time += elapsed_time
 
             file.write(f"Experiment: {game['game_name']}, Time: {elapsed_time:.2f} seconds\n")
+            print(f"[Experiment] {game['game_name']} with model {game['model_name']} at temperature {game['temperature']} completed in {elapsed_time:.2f} seconds.")
 
             for key in aggregated_results:
                 aggregated_results[key] += results[key]
@@ -605,17 +663,22 @@ def main():
 
                         shape_heatmap_path = f"{shape_path}/{model.replace(':', '_')}_{str(temp).replace('.', '_')}_{shape}_heatmap.png"
                         plot_shapes_heatmap(shape_moves, shape_heatmap_path)
+                        print(f"[Heatmap] Generated heatmap for {shape_path}")
 
                     combined_heatmap_path = f"{base_path_model_temp}/{model.replace(':', '_')}_{str(temp).replace('.', '_')}_combined_heatmap.png"
                     plot_shapes_heatmap(all_moves, combined_heatmap_path)
+                    print(f"[Heatmap] Generated combined heatmap for {base_path_model_temp}")
 
             print("Heatmaps generated for all model/temperature conditions in shapes experiments.")
 
-        print(f"Aggregated Results after {sum(game['num_games'] for game in game_runs)} games:", aggregated_results)
+        print(f"\n[Aggregated Results] After {sum(game['num_games'] for game in game_runs)} games:")
+        for key, value in aggregated_results.items():
+            print(f"  {key}: {value}")
 
     # If needed, bar plots for shapes experiments can also be generated
     if shapes_experiments_enabled:
         bar_plot_shapes(base_path, models, temperatures, shapes)
+        print("Bar plots generated for shapes experiments.")
 
 if __name__ == "__main__":
     main()

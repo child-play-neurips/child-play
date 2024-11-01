@@ -105,7 +105,7 @@ def plot_results(df_dict):
 def main():
     base_path = '../experiment_board_games'
     games = ['tictactoe', 'connectfour', 'battleship']
-    models = ['gpt3_5', 'gpt4']
+    models = ['gpt3_5', 'gpt4', 'gpt4o', 'gpt4o_mini']
     conditions = ['temp_0', 'temp_0.5', 'temp_1', 'temp_1.5']
 
     results = read_experiment_data(base_path, games, models, conditions)

@@ -13,7 +13,7 @@ from wrapper import ask
 # temperatures = [0, 0.5, 1, 1.5]
 
 models = ['oa:gpt-4o-2024-08-06', 'oa:gpt-4o-mini-2024-07-18']
-temperatures = [0]
+temperatures = [0, 0.5, 1, 1.5]
 
 # URL of the local server running the API
 SERVER_URL = "http://127.0.0.1:5000"

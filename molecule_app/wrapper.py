@@ -1,9 +1,9 @@
 import openai
 from openai import OpenAI
 from transformers import pipeline
-from google.cloud import aiplatform
+# from google.cloud import aiplatform
 
-aiplatform.init(project="crafty-hall-429513-t0")
+# aiplatform.init(project="crafty-hall-429513-t0")
 
 openai.api_key = ""
 

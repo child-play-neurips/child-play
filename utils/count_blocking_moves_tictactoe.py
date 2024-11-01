@@ -255,7 +255,7 @@ def process_experiments(base_path, models, conditions):
 
 def main():
     base_path = '../experiment_board_games'
-    models = ['gpt3_5', 'gpt4']
+    models = ['gpt3_5', 'gpt4', 'gpt4o', 'gpt4o_mini']
     conditions = ['temp_0', 'temp_0.5', 'temp_1', 'temp_1.5']
 
     results = process_experiments(base_path, models, conditions)

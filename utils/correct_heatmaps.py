@@ -8,47 +8,55 @@ from scripts_games.connectfour import ConnectFour
 from scripts_games.battleship import BattleShip
 from scripts_games.tictactoe import TicTacToe
 
-def generate_heatmaps_from_logs(logs_folder, game_name, board_size, players, save_path):
+def generate_heatmaps_from_logs(logs_folder, game_name, board_size, save_path):
     """
     Generate heatmaps from logs and save them as images.
     """
-    print("="*50)
+    print("=" * 50)
     print(logs_folder)
-    # Construct the correct file path based on the provided example
-    log_filename = f"{logs_folder}/game_logs_{game_name}.json"  # Correct path based on your example
-    print(f"Attempting to open log file at: {log_filename}")  # Debugging output
+    # Construct the correct file path
+    log_filename = f"{logs_folder}/game_logs_{game_name}.json"
+    print(f"Attempting to open log file at: {log_filename}")
 
     try:
         with open(log_filename, 'r') as file:
             game_logs = json.load(file)
         all_game_logs = [{"player": log['player'], "move": log['move']} for log in game_logs]
-        
+
+        # Extract unique player indices from logs
+        unique_players = sorted(set(log['player'] for log in game_logs))
+        print(f"Unique player indices found: {unique_players}")
+
+        # Map player indices to names (using "Player X" as default names)
+        player_names = [f"Player {i}" for i in unique_players]
+
         if all_game_logs:
-            plot_heatmap(all_game_logs, game_name, board_size, players, save_path)
+            plot_heatmap(all_game_logs, game_name, board_size, player_names, save_path)
         else:
             print(f"No moves to plot for {game_name} in {logs_folder}")
     except FileNotFoundError:
         print(f"Log file not found: {log_filename}")
-        # Optionally, list what files are actually in the directory
         print("Files in directory:", os.listdir(logs_folder))
 
 def plot_heatmap(all_moves, game_name, board_size, players, save_path):
     if game_name.lower() == "connectfour":
-        heatmaps = [np.zeros((board_size)) for _ in players]
+        heatmaps = [np.zeros((board_size,)) for _ in players]
 
-        # Populate heatmaps for Connect Four
         for move_info in all_moves:
             player_index = move_info["player"]
             column = move_info["move"]
-            # Find the first available row from the bottom up
-            # if heatmaps[player_index][column] == 0:
+            if player_index >= len(heatmaps):
+                print(f"Warning: player_index {player_index} out of bounds for players {players}")
+                continue
             heatmaps[player_index][column] += 1
     else:
         heatmaps = [np.zeros((board_size, board_size)) for _ in players]
-        # Populate heatmaps for other games
         for move_info in all_moves:
             player_index = move_info["player"]
             row, col = move_info["move"]
+            if player_index >= len(heatmaps):
+                print(f"Warning: player_index {player_index} out of bounds for players {players}")
+                continue
             heatmaps[player_index][row, col] += 1
 
     # Normalize and format percentages in each heatmap
@@ -59,6 +67,9 @@ def plot_heatmap(all_moves, game_name, board_size, players, save_path):
 
     # Visualization of heatmaps
     fig, axes = plt.subplots(1, len(players), figsize=(10 * len(players), 5))
+    if len(players) == 1:
+        axes = [axes]  # Ensure axes is iterable
+
     for i, heatmap in enumerate(heatmaps):
         if game_name.lower() == "connectfour":
             heatmap = heatmap.reshape((1, board_size))  # Reshape for Connect Four
@@ -74,12 +85,11 @@ def plot_heatmap(all_moves, game_name, board_size, players, save_path):
             t.set_fontsize(18)
         axes[i].set_ylabel('')  # Remove y-axis label
 
-        # Swap x and y axis for Connect Four
-        if game_name.lower() == "connectfour":
-            axes[i].set_xlabel(f'{players[i]} Moves Heatmap')
-        
+        # Set the title to the player's name
+        axes[i].set_title(f'{players[i]} Moves Heatmap', fontsize=16)
 
-    plt.suptitle(f"Distribution of Moves Across All Played Moves at {game_name}")
+    plt.suptitle(f"Distribution of Moves Across All Played Moves in {game_name}", fontsize=20)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust layout to accommodate suptitle
     plt.savefig(save_path, format='svg')
     plt.close(fig)
 
@@ -150,10 +160,10 @@ def main():
 
     for game_info in game_runs:
         folder_name = game_info['experiment_name']
-        player_names = [game_info['model_name'], "Random"]
+        # The `players` list is now handled within `generate_heatmaps_from_logs`
         file_name = game_info['experiment_name'].split("/")[1]
         save_path = f"./new_heatmaps/{file_name}_heatmap.svg"
-        generate_heatmaps_from_logs(folder_name, game_info['game_name'], game_info['board_size'], player_names, save_path)
+        generate_heatmaps_from_logs(folder_name, game_info['game_name'], game_info['board_size'], save_path)
 
 if __name__ == "__main__":
     main()

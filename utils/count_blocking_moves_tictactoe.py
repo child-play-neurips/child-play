@@ -1,5 +1,6 @@
 import os
 import json
+import argparse  # Added for command-line argument parsing
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -90,7 +91,7 @@ def count_moves(game_logs):
         })
         print(f"Turn finished for player {player + 1} ------------------------")
 
-    if win_flag == False:
+    if not win_flag:
         games_played += 1
 
     average_moves = {player: round(total_moves[player] / games_played,2) if games_played > 0 else 0 for player in total_moves}
@@ -113,7 +114,7 @@ def count_moves(game_logs):
         'total_games': games_played
     }
 
-def plot_results(models, results, conditions):
+def plot_results(models, results, conditions, plot_type='bar'):
     data_to_plot = []
     stats_to_plot = []
 
@@ -150,49 +151,100 @@ def plot_results(models, results, conditions):
     df = pd.DataFrame(data_to_plot)
     std_df = pd.DataFrame(stats_to_plot)
 
-    plt.figure(figsize=(24, 6))
-    bar_width = 0.10  # Reduced width to accommodate multiple bars side by side
+    if plot_type == 'bar':
+        plt.figure(figsize=(24, 6))
+        bar_width = 0.10  # Reduced width to accommodate multiple bars side by side
 
-    for i, measure in enumerate(['Average Moves', 'Missed Wins', 'Missed Blocks']):
-        ax = plt.subplot(1, 3, i+1)
-        unique_temperatures = df['Temperature'].unique().astype(str)
-        temp_positions = np.arange(len(unique_temperatures))
+        for i, measure in enumerate(['Average Moves', 'Missed Wins', 'Missed Blocks']):
+            ax = plt.subplot(1, 3, i+1)
+            unique_temperatures = df['Temperature'].unique().astype(str)
+            temp_positions = np.arange(len(unique_temperatures))
 
-        offset = -bar_width * len(models) * 0.5  # Initialize offset
+            offset = -bar_width * len(models) * 0.5  # Initialize offset
 
-        for idx, model in enumerate(models):
-            for player_type in ['Model', 'Random']:
-                condition_data = df[(df['Model'] == model) & (df['Player'].str.contains(player_type))]
-                values = condition_data[measure].values
-                
-                if measure == 'Average Moves':
-                    errors = condition_data.apply(lambda x: std_df[(std_df['Model'] == x['Model']) & (std_df['Temperature'] == x['Temperature'])]['Std'].iloc[0][measure], axis=1)
-                    corrected_errors = np.where(values - errors < 0, values, errors)  # Avoid negative values
-                    if player_type == 'Random':
-                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'Random Player (vs {model})', yerr=corrected_errors, capsize=5)
+            for idx, model in enumerate(models):
+                for player_type in ['Model', 'Random']:
+                    condition_data = df[(df['Model'] == model) & (df['Player'].str.contains(player_type))]
+                    values = condition_data[measure].values
+                    
+                    if measure == 'Average Moves':
+                        errors = condition_data.apply(lambda x: std_df[(std_df['Model'] == x['Model']) & (std_df['Temperature'] == x['Temperature'])]['Std'].iloc[0][measure], axis=1)
+                        corrected_errors = np.where(values - errors < 0, values, errors)  # Avoid negative values
+                        if player_type == 'Random':
+                            ax.bar(temp_positions + offset, values, width=bar_width, label=f'Random Player (vs {model})', yerr=corrected_errors, capsize=5)
+                        else:
+                            ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
                     else:
-                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}', yerr=corrected_errors, capsize=5)
-                else:
-                    if player_type == 'Random':
-                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'Random Player (vs {model})')
-                    else:
-                        ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}')
+                        if player_type == 'Random':
+                            ax.bar(temp_positions + offset, values, width=bar_width, label=f'Random Player (vs {model})')
+                        else:
+                            ax.bar(temp_positions + offset, values, width=bar_width, label=f'{model} {player_type}')
 
-                offset += bar_width
+                    offset += bar_width
 
-        ax.set_xticks(temp_positions)
-        ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
-        ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
+            ax.set_xticks(temp_positions)
+            ax.set_xticklabels([temp.split('_')[1] for temp in unique_temperatures], fontsize=12, fontweight='bold')
+            ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
 
-        ax.set_title(measure, fontsize=14, fontweight='bold')
-        ax.set_ylabel('')  # Remove y-axis label
+            ax.set_title(measure, fontsize=14, fontweight='bold')
+            ax.set_ylabel('')  # Remove y-axis label
 
-        if i == 2:  # Only add legend to the last plot
-            ax.legend(title_fontsize='20', loc='upper right')
+            if i == 2:  # Only add legend to the last plot
+                ax.legend(title='Player and Model', title_fontsize='12', fontsize='10', loc='upper right')
 
-    plt.subplots_adjust(wspace=0.3)  # Increase space between plots
-    plt.tight_layout()
-    plt.show()
+        plt.subplots_adjust(wspace=0.3)  # Increase space between plots
+        plt.tight_layout()
+        plt.show()
+
+    elif plot_type == 'scatter':
+        fig, axes = plt.subplots(3, 1, figsize=(24, 18))  # Create a shared figure with subplots
+        handles, labels = None, None  # Initialize variables for legend handles and labels
+
+        for i, (ax, measure) in enumerate(zip(axes, ['Average Moves', 'Missed Wins', 'Missed Blocks'])):
+            # Create the lineplot without a legend
+            sns.lineplot(
+                data=df,
+                x='Temperature',
+                y=measure,
+                hue='Player',
+                style='Model',
+                markers=True,
+                dashes=False,
+                markersize=10,
+                linewidth=2,
+                palette='deep',
+                ax=ax,
+                legend=(i == 0)  # Only include the legend for the first subplot
+            )
+
+            # Set titles and labels
+            ax.set_title(measure, fontsize=14, fontweight='bold')
+            ax.set_ylabel(measure, fontsize=12, fontweight='bold')
+
+            # Remove x-axis labels for all but the last subplot
+            if i < 2:  # If not the last subplot
+                ax.set_xlabel('')
+                ax.set_xticklabels([])
+            else:
+                ax.set_xlabel('Temperature', fontsize=12, fontweight='bold')
+
+            # Collect handles and labels from the first subplot
+            if i == 0:
+                handles, labels = ax.get_legend_handles_labels()
+                ax.legend_.remove()  # Remove the legend from the first subplot after capturing handles
+
+        # Add the legend outside the top-most plot
+        if handles and labels:  # Ensure handles and labels are not None
+            fig.legend(
+                handles,
+                labels,
+                title='Player and Model',
+                bbox_to_anchor=(0.96, 0.89)
+            )
+        plt.subplots_adjust(right=0.85, hspace=0.3)  # Adjust right to make space for legend
+        # plt.tight_layout()
+        # Adjust layout to ensure all plots and the legend are fully visible
+        plt.show()
 
 def average_stats(stats_list):
     averaged_stats = {}
@@ -254,12 +306,17 @@ def process_experiments(base_path, models, conditions):
     return all_results
 
 def main():
+    parser = argparse.ArgumentParser(description='Process Tic-Tac-Toe game logs and generate plots.')
+    parser.add_argument('--scatter', action='store_true', help='Generate scatter (line) plots instead of bar plots.')
+    args = parser.parse_args()
+
     base_path = '../experiment_board_games'
     models = ['gpt3_5', 'gpt4', 'gpt4o', 'gpt4o_mini']
     conditions = ['temp_0', 'temp_0.5', 'temp_1', 'temp_1.5']
 
     results = process_experiments(base_path, models, conditions)
-    plot_results(models, results, conditions)
+    plot_type = 'scatter' if args.scatter else 'bar'
+    plot_results(models, results, conditions, plot_type=plot_type)
 
 if __name__ == '__main__':
     main()

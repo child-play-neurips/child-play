@@ -16,3 +16,5 @@ Experiment: connectfour, Time: 243.55 seconds
 Experiment: connectfour, Time: 20.71 seconds
 Experiment: connectfour, Time: 276.83 seconds
 Experiment: tictactoe, Time: 198.54 seconds
+Experiment: tictactoe, Time: 210.76 seconds
+Experiment: tictactoe, Time: 280.80 seconds

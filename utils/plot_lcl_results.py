@@ -20,9 +20,32 @@ def plot_proportions(df_validity, df_construct, plot_type='bar'):
         Valid_Mean=('Valid', 'mean'),
         Valid_Std=('Valid', 'std'),
         N=('Valid', 'count')
-    ).reset_index()
+    ).reset_index() 
     stats_construct['Valid_Proportion'] = stats_construct['Valid_Mean'] * 100  # Convert to percentage
     stats_construct['Valid_SE'] = (stats_construct['Valid_Std'] / np.sqrt(stats_construct['N'])) * 100  # Convert to percentage
+
+    # Print the aggregated statistics
+    print("=== Correct Responses ===")
+    for temp in stats_validity['Temperature'].unique():
+        print(f"\nTemperature: {temp}")
+        temp_data = stats_validity[stats_validity['Temperature'] == temp]
+        for _, row in temp_data.iterrows():
+            print(f"  Model: {row['Model']}")
+            print(f"    Mean Correct: {row['Correct_Mean']:.2f}")
+            print(f"    Correct Proportion (%): {row['Correct_Proportion']:.2f}")
+            print(f"    Standard Error (%): {row['Correct_SE']:.2f}")
+            print(f"    Sample Size: {row['N']}")
+    
+    print("\n=== Valid Constructs ===")
+    for temp in stats_construct['Temperature'].unique():
+        print(f"\nTemperature: {temp}")
+        temp_data = stats_construct[stats_construct['Temperature'] == temp]
+        for _, row in temp_data.iterrows():
+            print(f"  Model: {row['Model']}")
+            print(f"    Mean Valid: {row['Valid_Mean']:.2f}")
+            print(f"    Valid Proportion (%): {row['Valid_Proportion']:.2f}")
+            print(f"    Standard Error (%): {row['Valid_SE']:.2f}")
+            print(f"    Sample Size: {row['N']}")
 
     if plot_type == 'bar':
         plt.figure(figsize=(12, 6))
@@ -108,7 +131,7 @@ def plot_proportions(df_validity, df_construct, plot_type='bar'):
         # Collect handles and labels from the second subplot for legend placement
         handles, labels = ax2.get_legend_handles_labels()
 
-         # Add the legend outside the top-most plot
+        # Add the legend outside the top-most plot
         if handles and labels:  # Ensure handles and labels are not None
             ax1.legend(
                 handles,

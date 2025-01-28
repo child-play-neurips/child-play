@@ -217,7 +217,7 @@ def main():
 
         results, all_game_messages, all_game_logs = run_game_series(game_instance, player, num_games, debug)
 
-        save_dataset_to_json(results, os.path.join(folder_name, f'results_{game["game_name"]}.json'))
+        save_dataset_to_json(results, os.path.join(folder_name, f'results.json'))
         save_dataset_to_json(all_game_messages, os.path.join(folder_name, f'game_messages_{game["game_name"]}.json'))
         save_dataset_to_json(all_game_logs, os.path.join(folder_name, f'game_logs_{game["game_name"]}.json'))
 

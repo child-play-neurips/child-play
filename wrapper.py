@@ -12,11 +12,17 @@
 
 # OpenAi imports
 # from utils.gpt_api import key_openai
-import openai
+import os
 from openai import OpenAI
+from dotenv import load_dotenv
+import logging
 
-openai.api_key = ""
-client = OpenAI(api_key=openai.api_key)
+logger = logging.getLogger(__name__)
+
+load_dotenv()
+
+openai_api_key = os.environ.get("OPENAI_API_KEY")
+client = OpenAI(api_key=openai_api_key)
 
 # Hugging face imports
 from transformers import pipeline

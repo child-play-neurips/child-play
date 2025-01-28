@@ -6,6 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import time
 import pandas as pd
+import signal  # <-- NEW IMPORT for timeouts
 
 from scripts_games.connectfour import ConnectFour
 from scripts_games.battleship import BattleShip
@@ -13,6 +14,15 @@ from scripts_games.tictactoe import TicTacToe
 from scripts_games.shapes import Shapes, bar_plot_shapes
 
 from wrapper import ask
+
+# === NEW TIMEOUT EXCEPTION AND HANDLER ===
+class TimeoutException(Exception):
+    """Raised when the LLM request times out."""
+    pass
+
+def _timeout_handler(signum, frame):
+    raise TimeoutException("LLM request timed out.")
+# ==========================================
 
 class PlayerBase:
     def __init__(self, player_id, name, debug=False):
@@ -29,7 +39,7 @@ class PlayerBase:
             self.messages.append(message)
 
 class LLMPlayer(PlayerBase):
-    def __init__(self, game, model_name="oa:gpt-3.5-turbo-0125", player_id=0, player_name="LLM",  temperature=0, debug=False):
+    def __init__(self, game, model_name="oa:gpt-3.5-turbo-0125", player_id=0, player_name="LLM", temperature=0, debug=False):
         super().__init__(player_id, player_name, debug)
         self.player_id = player_id
         self.player_name = player_name
@@ -58,21 +68,48 @@ class LLMPlayer(PlayerBase):
         print("=" * 50)
 
     def make_guess(self, game, previous_play):
-        api_messages = [{"role": "system", "content": f"You are a player in a game of {self.game.name}. {self.game.prompt}."}]
+        api_messages = [
+            {
+                "role": "system",
+                "content": f"You are a player in a game of {self.game.name}. {self.game.prompt}."
+            }
+        ]
         current_state = game.get_text_state(None)
-        prompt = f"Player {self.player_id + 1} ({self.player_name}), it's your turn. Here's the current game state:\n{current_state}\nMy move is: "
+        prompt = (
+            f"Player {self.player_id + 1} ({self.player_name}), it's your turn. "
+            f"Here's the current game state:\n{current_state}\nMy move is: "
+        )
         user_message = {"role": "user", "content": f"{prompt}"}
-        
         self.collect_message(f"System Message: {user_message['content']}")
         api_messages.append(user_message)
 
         if self.debug:
             print(f"\n[LLMPlayer] Prompt to LLM:\n{prompt}")
 
-        response = ask(api_messages=api_messages, temperature=self.temperature, model=self.model_name)
+        # === TIMEOUT SETUP ===
+        signal.signal(signal.SIGALRM, _timeout_handler)  # set the handler
+        timeout_seconds = 30  # you can adjust this as needed
+        signal.alarm(timeout_seconds)                    # start the timer
+
+        try:
+            # Attempt to call LLM
+            response = ask(api_messages=api_messages, temperature=self.temperature, model=self.model_name)
+        except TimeoutException:
+            # If it took too long, skip this game
+            print(f"[LLMPlayer] LLM timed out after {timeout_seconds} seconds. Skipping this game.")
+            response = None
+        finally:
+            # Cancel the alarm no matter what
+            signal.alarm(0)
+
         self.collect_message(f"LLM Response:\n{response}")
-        print(f"\n[LLMPlayer] Received Response from Model:\n{response}\n")
-        api_messages.append({"role": "user", "content": f"Your Response:\n{response}"})
+        if response:
+            print(f"\n[LLMPlayer] Received Response from Model:\n{response}\n")
+
+        # If None => timed out, or empty => skip game
+        if response is None or not response.strip():
+            print("[LLMPlayer] No or empty response from LLM. Skipping this game.")
+            return "SKIP_GAME"
 
         return self.parse_move(response, game)
     
@@ -201,6 +238,12 @@ def run_game_series(game_instance, player1, player2, num_games, max_invalid_atte
         all_game_messages.append(game_messages)
         all_game_logs.extend(game_log)  # Append the move log from each game
 
+        # --- If game was skipped (player == -2), do NOT count. Just continue. ---
+        if player == -2:
+            print(f"Game {i+1} was skipped because the LLM never returned a response.\n")
+            continue
+        # ------------------------------------------------------------------------
+
         if player == 0:
             results['P1 Wins'] += 1
             if debug:
@@ -255,25 +298,32 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
         print(f"\n[Turn {turn + 1}] {current_player.name}'s turn.")
 
         guess = current_player.make_guess(game_instance, previous_play)
-
         previous_play = guess
+
+        # === If LLM returned "SKIP_GAME", skip immediately. ===
+        if guess == "SKIP_GAME":
+            print("[play_one_game] Timed out or no response. Skipping this game.")
+            return game_messages, wrong_moves, move_log, -2
+        # =====================================================
 
         if guess is not None:  # Proceed if a guess was made
             message, valid_move = game_instance.guess(current_player_index, guess, current_player)
             collect_game_message(message)
             print(f"[Move] {message}")
 
+            # INVALID MOVE => that player LOSES immediately
             if not valid_move:
                 invalid_attempts[current_player_index] += 1
-                wrong_moves[current_player_index] += 1  # Count invalid move as wrong move
-
-                if invalid_attempts[current_player_index] >= max_invalid_attempts:
-                    # End game if max invalid attempts are exceeded
-                    game_instance.game_over = True
-                    winning_message = f"Game over. {players[1 - current_player_index].name} wins by default due to {current_player.name}'s repeated invalid moves."
-                    collect_game_message(winning_message)
-                    print(f"[Game Over] {winning_message}")
-                    return game_messages, wrong_moves, move_log, 1 - current_player_index  # Other player wins
+                wrong_moves[current_player_index] += 1
+                # End game: other player wins by default
+                game_instance.game_over = True
+                winning_message = (
+                    f"Invalid move by {current_player.name}. "
+                    f"{players[1 - current_player_index].name} wins by default!"
+                )
+                collect_game_message(winning_message)
+                print(f"[Game Over] {winning_message}")
+                return game_messages, wrong_moves, move_log, 1 - current_player_index
             else:
                 invalid_attempts[current_player_index] = 0  # Reset on valid move
                 if game_instance.name == "shapes":
@@ -293,7 +343,7 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
                             "turn": turn,
                             "result": "Loss"
                         })
-                        wrong_moves[current_player_index] += 1  # Count incorrect guess as wrong move
+                        wrong_moves[current_player_index] += 1
             # Handle game over state
             if game_instance.game_over:
                 final_state_message = game_instance.get_text_state(current_player_index)
@@ -319,20 +369,23 @@ def play_one_game(game_instance, player1, player2, size, max_invalid_attempts=1,
                     print("[Game Over] Game ended unexpectedly.")
                     return game_messages, wrong_moves, move_log, -1
 
-        else:  # Handle case where guess is None (invalid input not leading to a guess)
+        else:  
+            # If guess is None (meaning we couldn't parse or it was obviously invalid),
+            # that is an invalid move => immediate loss for that player.
             invalid_attempts[current_player_index] += 1
-            wrong_moves[current_player_index] += 1  # Count as wrong move
-            if invalid_attempts[current_player_index] >= max_invalid_attempts:
-                # End game if max invalid attempts are exceeded
-                game_instance.game_over = True
-                winning_message = f"{players[1 - current_player_index].name} wins by default due to {current_player.name}'s repeated invalid moves."
-                collect_game_message(winning_message)
-                print(f"[Game Over] {winning_message}")
-                return game_messages, wrong_moves, move_log, 1 - current_player_index  # Other player wins
+            wrong_moves[current_player_index] += 1
+            game_instance.game_over = True
+            winning_message = (
+                f"Invalid input from {current_player.name}. "
+                f"{players[1 - current_player_index].name} wins by default!"
+            )
+            collect_game_message(winning_message)
+            print(f"[Game Over] {winning_message}")
+            return game_messages, wrong_moves, move_log, 1 - current_player_index
 
         turn += 1
         if not game_instance.game_over:
-            current_player_index = 1 - current_player_index  # Switch turns only after valid move or game over
+            current_player_index = 1 - current_player_index  # Switch turns only after a valid move
 
     # Fallback return in case game_over is not set correctly
     return game_messages, wrong_moves, move_log, -1
@@ -483,7 +536,7 @@ def main():
     game_runs = []
 
     # Shapes experiment setup
-    shapes_experiments_enabled = True  # Set to False if you don't want to run shapes experiments
+    shapes_experiments_enabled = False  # Set to False if you don't want to run shapes experiments
     if shapes_experiments_enabled:
         shapes = ['square', 'triangle', 'cross']
         # models = ['oa:gpt-3.5-turbo-1106', 'oa:gpt-4-1106-preview']
@@ -509,86 +562,11 @@ def main():
                     })
 
     # Other games setup (e.g., Battleship, ConnectFour)
-    board_games_enabled = False  # Set to False if you don't want to run other games
+    board_games_enabled = True  # Set to False if you don't want to run other games
     if board_games_enabled:
         game_runs += [
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0', 'temperature': 0},
-            
-            # gpt-4o-mini-2024-07-18
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_0', 'temperature': 0},
-
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_0.5', 'temperature': 0.5},
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_0.5', 'temperature': 0.5},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_0.5', 'temperature': 0.5},
-
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_1', 'temperature': 1},
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_1', 'temperature': 1},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_1', 'temperature': 1},
-
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_mini_oneshot_temp_1.5', 'temperature': 1.5},
-            {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_mini_oneshot_temp_1.5', 'temperature': 1.5},
-            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_mini_oneshot_temp_1.5', 'temperature': 1.5},
-            
-            # gpt-4o-2024-08-06
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0', 'temperature': 0}
-
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_0.5', 'temperature': 0.5},
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_0.5', 'temperature': 0.5},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0.5', 'temperature': 0.5},
-
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_1', 'temperature': 1},
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_1', 'temperature': 1},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_1', 'temperature': 1},
-
-            # {'game_class': BattleShip, 'game_name': 'battleship', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_battleship_gpt4o_oneshot_temp_1.5', 'temperature': 1.5},
-            {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_1.5', 'temperature': 1.5},
-            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_1.5', 'temperature': 1.5}
-
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-3.5-turbo-1106', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt3_5_oneshot_temp_0', 'temperature': 0}
-            # Mistral
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:mistralai/Mistral-7B-Instruct-v0.2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_mistral_7B_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'mistralai/Mistral-7B-Instruct-v0.2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_mistral_7B_oneshot_temp_0', 'temperature': 0},
-
-            # distilbert/distilgpt2
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:distilbert/distilgpt2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_distilgpt2_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:distilbert/distilgpt2', 'num_games': 100, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_distilgpt2_oneshot_temp_0', 'temperature': 0},
-
-            # # openai-community/gpt2
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:openai-community/gpt2', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_gpt2_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:openai-community/gpt2', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_gpt2_oneshot_temp_0', 'temperature': 0},
-
-            # tiiuae/falcon-mamba-7b
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:tiiuae/falcon-7b-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_falcon_mamba_7B_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:tiiuae/falcon-7b-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_falcon_mamba_7B_oneshot_temp_0', 'temperature': 0},
-
-            # # lmms-lab/llama3-llava-next-8b
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_llama3_llava_8B_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_llama3_llava_8B_oneshot_temp_0', 'temperature': 0},
-
-            # # meta-llama/Meta-Llama-3-8B
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:meta-llama/Meta-Llama-3-8B', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_llama_3_8B_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:meta-llama/Meta-Llama-3-8B', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_llama_3_8B_oneshot_temp_0', 'temperature': 0},
-
-            # # lmms-lab/llama3-llava-next-8b
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_llama3_llava_next_8b_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:lmms-lab/llama3-llava-next-8b', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_llama3_llava_next_8b_oneshot_temp_0', 'temperature': 0},
-
-            # # xlnet/xlnet-base-cased
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:xlnet/xlnet-base-cased', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_xlnet_base_cased_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:xlnet/xlnet-base-cased', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_xlnet_base_cased_oneshot_temp_0', 'temperature': 0},
-
-            # # microsoft/Phi-3-mini-4k-instruct
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:microsoft/Phi-3-mini-4k-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_phi_3_mini_4k_instruct_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:microsoft/Phi-3-mini-4k-instruct', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_phi_3_mini_4k_instruct_oneshot_temp_0', 'temperature': 0},
-
-            # # google/gemma-2-9b-it
-            # {'game_class': ConnectFour, 'game_name': 'connectfour', 'board_size': 7, 'model_name': 'hf:google/gemma-2-9b-it', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_connectfour_gemma_2_9b_it_oneshot_temp_0', 'temperature': 0},
-            # {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'hf:google/gemma-2-9b-it', 'num_games': 10, 'experiment_name': 'experiment_board_games/hf_experiment_tictactoe_gemma_2_9b_it_oneshot_temp_0', 'temperature': 0}
+            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-2024-08-06', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_connectfour_gpt4o_oneshot_temp_1.5', 'temperature': 1.5},
+            {'game_class': TicTacToe, 'game_name': 'tictactoe', 'board_size': 3, 'model_name': 'oa:gpt-4o-mini-2024-07-18', 'num_games': 100, 'experiment_name': 'experiment_board_games/experiment_tictactoe_gpt4o_oneshot_temp_0', 'temperature': 0},
         ]
 
     if not game_runs:
@@ -651,6 +629,10 @@ def main():
         # Generate heatmaps for shapes experiments
         if shapes_experiments_enabled:
             base_path = 'experiment_shapes'
+            shapes = ['square', 'triangle', 'cross']  # For clarity in loops
+            models = ['oa:gpt-4o-2024-08-06', 'oa:gpt-4o-mini-2024-07-18']
+            temperatures = [0, 0.5, 1, 1.5]
+
             for model in models:
                 for temp in temperatures:
                     all_moves = []

@@ -6,26 +6,27 @@ import seaborn as sns
 import numpy as np
 
 def read_experiment_data(base_path, games, models, conditions):
-    all_results = {game: {} for game in games}
+    all_results = {game: {model: {} for model in models} for game in games}
     
     for game in games:
         for model in models:
-            model_results = {}
             for condition in conditions:
                 file_name = f'experiment_{game}_{model}_oneshot_{condition}/results_{game}.json'
                 path = os.path.join(base_path, file_name)
                 
+                if not os.path.exists(path):
+                    print(f"Warning: File {path} does not exist.")
+                    continue
+                
                 with open(path, 'r') as file:
                     game_logs = json.load(file)
                     
-                model_results[condition] = {
-                    'Wins': game_logs['P1 Wins'],
-                    'Wins (Random Player)': game_logs['P2 Wins'],
-                    'Ties': game_logs['Ties'],
-                    'Incorrect Moves': game_logs['P1 Wrong Moves']
+                all_results[game][model][condition] = {
+                    'Wins': game_logs.get('P1 Wins', 0),
+                    'Wins (Random Player)': game_logs.get('P2 Wins', 0),
+                    'Ties': game_logs.get('Ties', 0),
+                    'Incorrect Moves': game_logs.get('P1 Wrong Moves', 0)
                 }
-    
-            all_results[game][model] = model_results
     
     return all_results
 
@@ -35,7 +36,12 @@ def prepare_dataframe(results, games, models, conditions):
     for game in games:
         for model in models:
             for condition in conditions:
-                result = results[game][model][condition]
+                result = results[game][model].get(condition, {
+                    'Wins': 0,
+                    'Wins (Random Player)': 0,
+                    'Ties': 0,
+                    'Incorrect Moves': 0
+                })
                 total_plays = result['Wins'] + result['Wins (Random Player)'] + result['Ties'] + result['Incorrect Moves']
                 if total_plays > 0:
                     proportions = {
@@ -131,6 +137,38 @@ def plot_results(df_dict, plot_type='bar'):
             plt.subplots_adjust(right=0.85, hspace=0.4)
             plt.show()
 
+def print_totals(results, games, models, conditions, games_played=1000):
+    print("\n=== Total Results ===\n")
+    for game in games:
+        print(f"Game: {game.capitalize()}")
+        for model in models:
+            for condition in conditions:
+                res = results[game][model].get(condition, {
+                    'Wins': 0,
+                    'Wins (Random Player)': 0,
+                    'Ties': 0,
+                    'Incorrect Moves': 0
+                })
+                wins = res['Wins']
+                wins_random = res['Wins (Random Player)']
+                ties = res['Ties']
+                incorrect_moves = res['Incorrect Moves']
+                total_plays = wins + wins_random + ties + incorrect_moves
+
+                # Calculate percentages based on 1000 games per condition
+                percentage_wins = (wins / games_played) * 100
+                percentage_wins_random = (wins_random / games_played) * 100
+                percentage_ties = (ties / games_played) * 100
+                percentage_incorrect_moves = (incorrect_moves / games_played) * 100
+
+                print(f"  Model: {model}, Temperature: {condition.split('_')[1]}")
+                print(f"    Total Plays: {total_plays} / {games_played}")
+                print(f"    Wins: {wins} ({percentage_wins:.2f}%)")
+                print(f"    Wins (Random Player): {wins_random} ({percentage_wins_random:.2f}%)")
+                print(f"    Ties: {ties} ({percentage_ties:.2f}%)")
+                print(f"    Incorrect Moves: {incorrect_moves} ({percentage_incorrect_moves:.2f}%)")
+        print("-" * 40)
+
 def main():
     base_path = '../experiment_board_games'
     games = ['tictactoe', 'connectfour', 'battleship']
@@ -139,6 +177,9 @@ def main():
 
     results = read_experiment_data(base_path, games, models, conditions)
     df_dict = prepare_dataframe(results, games, models, conditions)
+
+    # Print total results to console with percentages based on 1000 plays per condition
+    print_totals(results, games, models, conditions, games_played=100)
 
     plot_type = 'scatter'  # Change this to 'bar' for bar plots
     plot_results(df_dict, plot_type=plot_type)
